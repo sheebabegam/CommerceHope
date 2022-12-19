@@ -1,0 +1,12 @@
+[
+  {
+    "img": "https://app.commercehope.com/_next/image?url=%2Fimages%2Fcommercehope-client-app.png&w=1920&q=75",
+    "card_header": "Front-end",
+    "para_txt": "The Front-end Application is designed for users to buy products online."
+  },
+  {
+    "img": "https://app.commercehope.com/_next/image?url=%2Fimages%2Fdashboard-commercehope.png&w=1920&q=75",
+    "card_header": "Admin Dashboard",
+    "para_txt": "The Admin Dashboard is Designed for the admin to manage products and sales."
+  }
+]
