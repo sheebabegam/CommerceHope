@@ -7,6 +7,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Live_Preview_cards from "./assets/JSON_data/Live_Preview_cards.json";
+import { Link } from "react-router-dom";
 
 function Live_preview_page() {
   const classes = useStyles();
@@ -148,9 +149,11 @@ function Live_preview_page() {
               className={classes.view_btn_div}
             >
               <div>
-                <Button variant="contained" className={classes.view_btn}>
-                  View Demo
-                </Button>
+                <Link to={data.link}>
+                  <Button variant="contained" className={classes.view_btn}>
+                    View Demo
+                  </Button>
+                </Link>
               </div>
             </CardActions>
           </Card>

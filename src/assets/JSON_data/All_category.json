@@ -1,0 +1,90 @@
+[
+  {
+    "name": "ladiesbag",
+    "stock": "sale",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1669211883%2Fmy-uploads%2Fhlrdgjqpljpkfyphrpgh.jpg&w=1920&q=75",
+    "prod_name": "Women Bag Ladies Leather Tote Fashion Shoulder Bags for Women 2022 Wallet",
+    "prod_star": 5,
+    "prod_color_no": 2,
+    "prod_strike_price": 30,
+    "prod_price": 27,
+    "available_no": ""
+  },
+  {
+    "name": "laptopbag",
+    "stock": "sale",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1669207662%2Fmy-uploads%2Fot6jath5w8rh3mezbuok.jpg&w=1920&q=75",
+    "prod_name": "Heroic Knight Fashion Super Thin Slim Backpack Men,Waterproof Casual Daily Backpack For Mac book ",
+    "prod_star": 5.0,
+    "prod_color_no": 5,
+    "prod_strike_price": 30.0,
+    "prod_price": 27,
+    "available_no": ""
+  },
+  {
+    "name": "headphones",
+    "stock": "new",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1669531943%2Fmy-uploads%2Fszujuf4ml5cgs5dd6dtb.jpg&w=1920&q=75",
+    "prod_name": "Gaming Headset With Mic For PC,PS4, Xbox One Over-Ear Headphones A1S",
+    "prod_star": "",
+    "prod_color_no": 4,
+    "prod_strike_price": 40.0,
+    "prod_price": 37.0,
+    "available_no": 5
+  },
+  {
+    "name": "camera",
+    "stock": "sale",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1671098132%2Fmy-uploads%2Fulxhjzumamiexmkditgx.jpg&w=1920&q=75",
+    "prod_name": "Interchangeable Lens Camera Lens Camera",
+    "prod_star": 5,
+    "prod_color_no": 5,
+    "prod_strike_price": 25.0,
+    "prod_price": 23.0,
+    "available_no": 9
+  },
+  {
+    "name": "casualshoe",
+    "stock": "new",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1669285412%2Fmy-uploads%2Fro6wpxqhist4qwnr8xib.png&w=1920&q=75",
+    "prod_name": "Women Causal shoes Women Causal shoes",
+    "prod_star": 5,
+    "prod_color_no": 2,
+    "prod_strike_price": 30.0,
+    "prod_price": 26.0,
+    "available_no": ""
+  },
+  {
+    "name": "cricketbat",
+    "stock": "new",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1671098422%2Fmy-uploads%2Fxfczcwvx4qqcbt6mnojh.jpg&w=1920&q=75",
+    "prod_name": "Tape Ball Bat Shock Waves Softball Cricket Bat",
+    "prod_star": "",
+    "prod_color_no": 2,
+    "prod_strike_price": 30.0,
+    "prod_price": 25.0,
+    "available_no": 10
+  },
+  {
+    "name": "ladiesbag",
+    "stock": "sale",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1671091498%2Fmy-uploads%2Flhavljqzw1h04hka3ssp.jpg&w=1920&q=75",
+    "prod_name": "Astore Black Hip Hop Large Capacity double compartment Vegan Leather Hand bag for women cross body and Shoulder Bag for ladies Top Handle bag for girls vanity bag",
+    "prod_star": "",
+    "prod_color_no": 2,
+    "prod_strike_price": 40,
+    "prod_price": 38,
+    "available_no": 7
+  },
+  {
+    "name": "football",
+    "stock": "new",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1671098595%2Fmy-uploads%2Fgxtm8mytdtnmi9virql2.jpg&w=1920&q=75",
+    "prod_name": "FIFA Professional Soccer Ball Football size 5",
+    "prod_star": "",
+    "prod_color_no": 5,
+    "prod_strike_price": 50.0,
+    "prod_price": 47.0,
+    "available_no": 10
+  }
+]
