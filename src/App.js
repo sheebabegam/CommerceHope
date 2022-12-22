@@ -2,14 +2,16 @@ import logo from "./logo.svg";
 import "./App.css";
 import Live_preview_page from "./Live_preview_page";
 import { Route, Routes } from "react-router-dom";
-import Admin_Page from "./Frontend_Page/components/Admin_Page";
+import Landing_Page from "./Frontend_Page/components/Landing_Page";
+import Login from "./Frontend_Page/components/Login";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Live_preview_page />} />
-        <Route path="/commercehope" element={<Admin_Page />} />
+        <Route path="/commercehope" element={<Landing_Page />} />
+        <Route path="/commercehope/login" element={<Login />} />
       </Routes>
     </div>
   );

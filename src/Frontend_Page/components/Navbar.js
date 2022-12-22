@@ -19,7 +19,11 @@ const Navbar = () => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="false" className={classes.navbar_div}>
+    <Container
+      maxWidth="false"
+      className={classes.navbar_div}
+      sx={{ position: "sticky" }}
+    >
       <div className={classes.commercehope_logo_div}>
         <div>
           <svg
@@ -157,7 +161,7 @@ const Navbar = () => {
         </Link>
 
         <Link
-          to="/commercehope"
+          to="/commercehope/login"
           sx={{
             textDecoration: "none",
             backgroundColor: "#6439ff",
