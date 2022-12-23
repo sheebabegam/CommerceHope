@@ -6,10 +6,10 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Live_Preview_cards from "./assets/JSON_data/Live_Preview_cards.json";
+import Live_Preview_cards from "./User_page/assets/JSON_data/Live_Preview_cards.json";
 import { Link } from "react-router-dom";
 
-function Live_preview_page() {
+function Route_page() {
   const classes = useStyles();
   return (
     <div className={classes.apps}>
@@ -171,7 +171,7 @@ function Live_preview_page() {
   );
 }
 
-export default Live_preview_page;
+export default Route_page;
 
 const useStyles = makeStyles({
   apps: {

@@ -1,17 +1,24 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Live_preview_page from "./Live_preview_page";
+import Route_page from "./Route_page";
 import { Route, Routes } from "react-router-dom";
-import Landing_Page from "./Frontend_Page/components/Landing_Page";
-import Login from "./Frontend_Page/components/Login";
+import Login from "./User_page/Pages/Login";
+import Register from "./User_page/Pages/Register";
+import Forget_password from "./User_page/Pages/Forget_password";
+import Landing_Page from "./User_page/Pages/Landing_Page";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Live_preview_page />} />
+        <Route path="/" element={<Route_page />} />
         <Route path="/commercehope" element={<Landing_Page />} />
         <Route path="/commercehope/login" element={<Login />} />
+        <Route path="/commercehope/register" element={<Register />} />
+        <Route
+          path="/commercehope/forget-password"
+          element={<Forget_password />}
+        />
       </Routes>
     </div>
   );

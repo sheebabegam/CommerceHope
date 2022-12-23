@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "../Layouts/Navbar";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -13,8 +13,9 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import { Paper, Button } from "@mui/material";
+import Footer from "../Layouts/Footer";
 
-function Login() {
+function Register() {
   const classes = useStyles();
   return (
     <div className={classes.color_main_div}>
@@ -49,13 +50,148 @@ function Login() {
                 className={classes.login_h4}
                 style={{ fontWeight: 700 }}
               >
-                Login
+                Get Started
               </Typography>
-              <p className={classes.login_p}>
-                Login to your account to continue
-              </p>
+              <p className={classes.login_p}>Create an account for free.</p>
             </div>
             <div>
+              <div className={classes.flex_reg_div}>
+                <CssTextField
+                  className={classes.fields}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="text"
+                  label="First Name"
+                  name="firstname"
+                  style={{
+                    fontFamily: "Montserrat",
+                    height: 70,
+                    color: "rgb(145, 158, 171)",
+                    width: "49%",
+                    marginRight: "20px !important",
+                  }}
+                  id="input-with-icon-textfield"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      color: "rgb(145, 158, 171)",
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  // value={firstname}
+                  // onChange={(e) => setFirstname(e.target.value)}
+                />{" "}
+                &nbsp; &nbsp;
+                <CssTextField
+                  className={classes.fields}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="text"
+                  label="Last Name"
+                  name="lastname"
+                  style={{
+                    fontFamily: "Montserrat",
+                    height: 70,
+                    color: "rgb(145, 158, 171)",
+                    width: "49%",
+                  }}
+                  id="input-with-icon-textfield"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      color: "rgb(145, 158, 171)",
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  // value={firstname}
+                  // onChange={(e) => setFirstname(e.target.value)}
+                />
+              </div>
+
+              <div className={classes.flex_reg_div}>
+                <CssTextField
+                  className={classes.fields}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="text"
+                  label="Gender"
+                  name="gender"
+                  style={{
+                    fontFamily: "Montserrat",
+                    height: 70,
+                    color: "rgb(145, 158, 171)",
+                    width: "49%",
+                    marginRight: "20px !important",
+                  }}
+                  id="input-with-icon-textfield"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      color: "rgb(145, 158, 171)",
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  // value={firstname}
+                  // onChange={(e) => setFirstname(e.target.value)}
+                />{" "}
+                &nbsp; &nbsp;
+                <CssTextField
+                  className={classes.fields}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="text"
+                  label="Phone No"
+                  name="phone"
+                  style={{
+                    fontFamily: "Montserrat",
+                    height: 70,
+                    color: "rgb(145, 158, 171)",
+                    width: "49%",
+                  }}
+                  id="input-with-icon-textfield"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      color: "rgb(145, 158, 171)",
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  // value={firstname}
+                  // onChange={(e) => setFirstname(e.target.value)}
+                />
+              </div>
               <CssTextField
                 className={classes.fields}
                 variant="outlined"
@@ -63,27 +199,30 @@ function Login() {
                 required
                 fullWidth
                 type="text"
-                label="First Name"
-                name="firstname"
-                style={{ fontFamily: "Montserrat", height: 70, color: "white" }}
+                label="Email Address"
+                name="email"
+                style={{
+                  fontFamily: "Montserrat",
+                  height: 70,
+                  color: "rgb(145, 158, 171)",
+                }}
                 id="input-with-icon-textfield"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <EmailIcon style={{ color: "white" }} />
+                      <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
                     </InputAdornment>
                   ),
                 }}
                 InputLabelProps={{
                   style: {
-                    color: "white",
+                    color: "rgb(145, 158, 171)",
                     fontFamily: "Montserrat",
                   },
                 }}
                 // value={firstname}
                 // onChange={(e) => setFirstname(e.target.value)}
               />
-
               <CssTextField
                 className={classes.fields}
                 variant="outlined"
@@ -91,25 +230,31 @@ function Login() {
                 required
                 fullWidth
                 type="text"
-                label="First Name"
-                name="firstname"
-                style={{ fontFamily: "Montserrat", height: 70, color: "white" }}
+                label="Password"
+                name="password"
+                style={{
+                  fontFamily: "Montserrat",
+                  height: 70,
+                  color: "rgb(145, 158, 171)",
+                }}
                 id="input-with-icon-textfield"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <LockIcon style={{ color: "white" }} />
+                      <LockIcon style={{ color: "rgb(145, 158, 171)" }} />
                     </InputAdornment>
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      <VisibilityOffIcon style={{ color: "white" }} />
+                      <VisibilityOffIcon
+                        style={{ color: "rgb(145, 158, 171)" }}
+                      />
                     </InputAdornment>
                   ),
                 }}
                 InputLabelProps={{
                   style: {
-                    color: "white",
+                    color: "rgb(145, 158, 171)",
                     fontFamily: "Montserrat",
                   },
                 }}
@@ -117,37 +262,39 @@ function Login() {
                 // onChange={(e) => setFirstname(e.target.value)}
               />
             </div>
-            <div className={classes.check_div}>
-              <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="Remember me"
-                />
-              </FormGroup>
-              <a href="" className={classes.forget_pass}>
-                Forget Password
-              </a>
-            </div>
+
             <div>
               <Button
                 variant="contained"
                 className={classes.login_btn}
                 style={{ fontWeight: 700, marginTop: 20, marginBottom: 20 }}
               >
-                Login
+                Register
               </Button>
             </div>
             <div>
-              <p className={classes.account_p}>
-                Don’t have an account?{" "}
-                <a href="" className={classes.get_started}>
-                  Get started
+              <p className={classes.agree}>
+                Already have an account?{" "}
+                <a href="/commercehope/login" className={classes.get_started}>
+                  Login
+                </a>
+              </p>
+              <p className={classes.account_agree}>
+                By registering, I agree to Commercehope{" "}
+                <a href="#" className={classes.color_reg_link}>
+                  Terms
+                </a>{" "}
+                and{" "}
+                <a href="#" className={classes.color_reg_link}>
+                  Privacy Policy
                 </a>
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
@@ -174,7 +321,7 @@ const CssTextField = styled(TextField)({
   height: "70px !important",
 });
 
-export default Login;
+export default Register;
 
 const useStyles = makeStyles({
   color_main_div: {
@@ -298,5 +445,16 @@ const useStyles = makeStyles({
     height: "55px",
     transition:
       "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+  },
+  flex_reg_div: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  color_reg_link: {
+    color: "white",
+  },
+  account_agree: {
+    color: "rgb(145, 158, 171)",
   },
 });
