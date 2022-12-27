@@ -179,9 +179,11 @@ function Landing_Page(props) {
           </Link>
         </div>
 
-        <Grid container spacing={2} className={classes.grid_padding}>
-          {All_categ}
-        </Grid>
+        <Link to="/commercehope/product-details">
+          <Grid container spacing={2} className={classes.grid_padding}>
+            {All_categ}
+          </Grid>
+        </Link>
 
         <ViewAllbtn> View All </ViewAllbtn>
 

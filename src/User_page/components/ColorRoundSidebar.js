@@ -28,6 +28,5 @@ const useStyles = makeStyles({
     display: "flex !important",
     alignItems: "flex-start",
     justifyContent: "flext-start",
-    marginBottom: 10,
   },
 });
