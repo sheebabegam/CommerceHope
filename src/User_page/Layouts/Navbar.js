@@ -82,7 +82,7 @@ const Navbar = () => {
               </Button>
             </div>
             <Link
-              to="/commercehope"
+              to="/commercehope/product-page"
               sx={{
                 textDecoration: "none",
                 backgroundColor: "#6439ff",
@@ -92,7 +92,7 @@ const Navbar = () => {
               <Button className={classes.nav_btn_css}>Men</Button>
             </Link>
             <Link
-              to="/commercehope"
+              to="/commercehope/product-list-view"
               sx={{
                 textDecoration: "none",
                 backgroundColor: "#6439ff",

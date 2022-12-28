@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,14 +19,22 @@ import { FormHelperText } from "@mui/material";
 import ProductAddToCart from "../components/ProductAddToCart";
 import ReactImageMagnify from "react-image-magnify";
 import WarrentyCard from "../components/WarrentyCard";
+import { Container } from "@mui/system";
+import Description from "./Description";
+import Reviews from "./Reviews";
+import ProductCardRelated from "../components/ProductCardRelated";
+import Footer from "../Layouts/Footer";
 
 function ProductDetails(props) {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
-
+  const [tab, setTab] = useState("description");
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  let RelatedProducts = props.RelatedProducts.map((card, i) => {
+    return <ProductCardRelated card={card} key={i} />;
+  });
   return (
     <div className={classes.whole_div}>
       <Navbar />
@@ -52,13 +60,6 @@ function ProductDetails(props) {
               headphones a1 s
             </p>
           </div>
-          <Box sx={{ flexGrow: 1 }}>
-            <AppBar>
-              <Typography variant="h6" color="inherit" component="div">
-                Home
-              </Typography>
-            </AppBar>
-          </Box>
         </div>
         <div>
           <div>
@@ -460,75 +461,67 @@ function ProductDetails(props) {
             </Grid>
           </Grid>
         </div>
-        <div className={classes.prod_det_tab_main_div}></div>
+        <div style={{ margin: "50px 0px" }}>
+          <Container className={classes.border_tab_div}>
+            <Button
+              className={classes.tab_btn}
+              onClick={() => setTab("description")}
+              style={
+                tab === "description"
+                  ? { borderBottom: "3px solid rgb(0, 125, 252)" }
+                  : { borderBottom: "none" }
+              }
+            >
+              Description
+            </Button>
+            <Button
+              className={classes.tab_btn}
+              onClick={() => setTab("review")}
+              style={
+                tab === "review"
+                  ? { borderBottom: "3px solid rgb(0, 125, 252)" }
+                  : { borderBottom: "none" }
+              }
+            >
+              Review
+            </Button>
+          </Container>
+          <Container className={classes.border_tab_div1}>
+            {tab === "description" && <Description />}
+            {tab === "review" && <Reviews />}
+          </Container>
+        </div>
         <div>
-          <Grid container spacing={2} style={{ padding: 10 }}>
-            <Grid item xs={4}>
-              <div className={classes.flex_div}>
-                <Typography variant="h6" className={classes.average_rating}>
-                  Average Rating
-                </Typography>
-                <Typography
-                  variant="h2"
-                  className={classes.rating_no}
-                  style={{ fontWeight: 700 }}
-                >
-                  5.0
-                </Typography>
-                <div className={classes.star_flex_div1}>
-                  <img src={star} alt="star" className={classes.star_img} />
-                  <img src={star} alt="star" className={classes.star_img} />
-                  <img src={star} alt="star" className={classes.star_img} />
-                  <img src={star} alt="star" className={classes.star_img} />
-                  <img src={star} alt="star" className={classes.star_img} />
-                </div>
-                <p className={classes.reviews_prod}>(4 reviews)</p>
-              </div>
-              <div className={classes.review_btn_div} style={{ padding: 24 }}>
-                <Button
-                  className={classes.write_review_btn}
-                  style={{ fontWeight: 700 }}
-                >
-                  <svg
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="EditRoundedIcon"
-                    fill="rgba(0, 125, 252, 0.5)"
-                    height={20}
-                    width={20}
-                  >
-                    <path d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                  </svg>
-                  &nbsp; Write Your Review
-                </Button>
-              </div>
-            </Grid>
-            <Grid item xs={8}>
-              <div>
-                <Grid container spacing={2} style={{ padding: 10 }}>
-                  <Grid item xs={2}>
-                    <div className={classes.reviewer_img_div}>
-                      <img
-                        src="https://res.cloudinary.com/techgater/image/upload/v1669279122/my-uploads/dfnylsuotuhwex7jkt1h.jpg"
-                        alt="img"
-                        className={classes.reviewer_img}
-                      />
-                    </div>
-                  </Grid>
-                  <Grid item xs={9}>
-                    <Typography variant="h6">Kamran Haider</Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    gewg
-                  </Grid>
-                </Grid>
-              </div>
-            </Grid>
+          <Typography
+            variant="h3"
+            className={classes.related_prod_h3}
+            style={{ fontWeight: 700 }}
+          >
+            Related Products
+          </Typography>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Grid
+            container
+            spacing={2}
+            className={classes.grid_padding}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {RelatedProducts}
           </Grid>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -610,8 +603,8 @@ const useStyles = makeStyles({
     color: "white",
   },
   star_img: {
-    height: "15px",
-    width: "15px",
+    height: "18px",
+    width: "18px",
     marginRight: 3,
   },
   star_flex_div: {
@@ -758,78 +751,162 @@ const useStyles = makeStyles({
     border: "1px solid rgba(145, 158, 171, 0.24)",
     transition: "all 0.3s ease-in-out 0s",
   },
-  average_rating: {
-    margin: "0px 0px 8px",
-    fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: "1rem",
-    fontFamily: "Montserrat",
-    color: "white",
-  },
-  rating_no: {
-    margin: "0px 0px 8px",
-    fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: "1rem",
-    fontFamily: "Montserrat",
-    color: "red",
-  },
-  reviews_prod: {
-    margin: "0px",
-    lineHeight: 1.57143,
-    fontFamily: "Montserrat",
-    fontSize: "0.75rem",
-    fontWeight: 400,
-    color: "rgb(145, 158, 171)",
-  },
-  flex_div: {
-    textAlign: "center",
-    borderBottom: "1px solid rgba(145, 158, 171, 0.24)",
-  },
-  star_flex_div1: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  write_review_btn: {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    boxSizing: "border-box",
-    backgroundColor: "transparent",
-    outline: "0px",
-    margin: "0px",
-    cursor: "pointer",
-    userSelect: "none",
-    verticalAlign: "middle",
-    appearance: "none",
-    textDecoration: "none",
-    fontWeight: 700,
-    lineHeight: "1.71429 !important",
-    fontSize: "0.9375rem !important",
+  tab_btn: {
+    color: "white !important",
     textTransform: "capitalize !important",
-    fontFamily: "Montserrat !important",
-    minWidth: "64px !important",
-    padding: "7px 21px !important",
-    borderRadius: "4px !important",
-    transition:
-      "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-    border: "1px solid rgba(0, 125, 252, 0.5) !important",
-    color: "rgb(0, 125, 252) !important",
-    height: "48px !important",
+    fontSize: "18px !important",
+    padding: "15px !important",
   },
-  review_btn_div: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+  border_tab_div: {
+    border: "1px solid rgba(145, 158, 171, 0.24)",
   },
-  reviewer_img_div: {
-    height: 64,
-    width: 64,
+  border_tab_div1: {
+    border: "1px solid rgba(145, 158, 171, 0.24)",
   },
-  reviewer_img: {
-    height: 64,
-    width: 64,
+  related_prod_h3: {
+    // margin: "64px 0px 24px",
+    fontWeight: 700,
+    lineHeight: 1.5,
+    fontSize: "2.2rem !important",
+    fontFamily: "Montserrat",
+    color: "rgb(255, 255, 255)",
+    textAlign: "center",
+    margin: "64px 24px !important",
   },
+
+  // average_rating: {
+  //   margin: "0px 0px 8px",
+  //   fontWeight: 600,
+  //   lineHeight: 1.5,
+  //   fontSize: "1rem",
+  //   fontFamily: "Montserrat",
+  //   color: "white",
+  // },
+  // rating_no: {
+  //   margin: "0px 0px 8px",
+  //   fontWeight: 600,
+  //   lineHeight: 1.5,
+  //   fontSize: "1rem",
+  //   fontFamily: "Montserrat",
+  //   color: "red",
+  // },
+  // reviews_prod: {
+  //   margin: "0px",
+  //   lineHeight: 1.57143,
+  //   fontFamily: "Montserrat",
+  //   fontSize: "0.75rem",
+  //   fontWeight: 400,
+  //   color: "rgb(145, 158, 171)",
+  // },
+  // flex_div: {
+  //   textAlign: "center",
+  //   borderBottom: "1px solid rgba(145, 158, 171, 0.24)",
+  // },
+  // star_flex_div1: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  // write_review_btn: {
+  //   display: "inline-flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   position: "relative",
+  //   boxSizing: "border-box",
+  //   backgroundColor: "transparent",
+  //   outline: "0px",
+  //   margin: "0px",
+  //   cursor: "pointer",
+  //   userSelect: "none",
+  //   verticalAlign: "middle",
+  //   appearance: "none",
+  //   textDecoration: "none",
+  //   fontWeight: 700,
+  //   lineHeight: "1.71429 !important",
+  //   fontSize: "0.9375rem !important",
+  //   textTransform: "capitalize !important",
+  //   fontFamily: "Montserrat !important",
+  //   minWidth: "64px !important",
+  //   padding: "7px 21px !important",
+  //   borderRadius: "4px !important",
+  //   transition:
+  //     "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+  //   border: "1px solid rgba(0, 125, 252, 0.5) !important",
+  //   color: "rgb(0, 125, 252) !important",
+  //   height: "48px !important",
+  // },
+  // review_btn_div: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  // reviewer_user_icon_div: {
+  //   position: "relative",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   flexShrink: 0,
+  //   fontFamily: "Montserrat",
+  //   fontSize: "1.25rem",
+  //   lineHeight: 1,
+  //   borderRadius: "50%",
+  //   overflow: "hidden",
+  //   userSelect: "none",
+  //   color: "rgb(26, 33, 56)",
+  //   backgroundColor: "rgb(99, 115, 129)",
+  //   width: "64px",
+  //   height: "64px",
+  // },
+  // reviewer_img: {
+  //   height: 64,
+  //   width: 64,
+  //   borderRadius: "50%",
+  // },
+  // star_img1: {
+  //   height: "14px",
+  //   width: "14px",
+  //   marginRight: 3,
+  // },
+  // november_para: {
+  //   margin: "0px",
+  //   lineHeight: 1.5,
+  //   fontSize: "0.625rem",
+  //   fontFamily: "Montserrat",
+  //   fontWeight: 400,
+  //   overflow: "hidden",
+  //   textOverflow: "ellipsis",
+  //   whiteSpace: "nowrap",
+  //   color: "rgb(145, 158, 171)",
+  //   float: "right",
+  // },
+  // name_typo: {
+  //   margin: "0px !important",
+  //   fontWeight: 600,
+  //   lineHeight: 1.5,
+  //   fontSize: "1rem !important",
+  //   fontFamily: "Montserrat !important",
+  //   overflow: "hidden",
+  //   textOverflow: "ellipsis",
+  //   whiteSpace: "nowrap",
+  //   color: "white",
+  // },
+  // great_typo: {
+  //   margin: "4px 0px 8px !important",
+  //   lineHeight: 1.57143,
+  //   fontSize: "0.875rem !important",
+  //   fontFamily: "Montserrat !important",
+  //   fontWeight: 400,
+  //   color: "white",
+  // },
+  // review_bag: {
+  //   height: "90px",
+  //   width: "100px",
+  //   borderRadius: "8px",
+  // },
+  // review_first_div: {
+  //   borderBottom: "1px solid rgba(145, 158, 171, 0.24)",
+  // },
+  // reviewbag_div: {
+  //   marginBottom: 30,
+  // },
 });

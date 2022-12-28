@@ -1,0 +1,24 @@
+[
+  {
+    "name": "ladiesbag",
+    "stock": "sale",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1671091498%2Fmy-uploads%2Flhavljqzw1h04hka3ssp.jpg&w=1920&q=75",
+    "prod_name": "Astore Black Hip Hop Large Capacity double compartment Vegan Leather Hand bag for women cross body and Shoulder Bag for ladies Top Handle bag for girls vanity bag",
+    "prod_star": "",
+    "prod_color_no": 2,
+    "prod_strike_price": 40,
+    "prod_price": 38,
+    "available_no": 7
+  },
+  {
+    "name": "ladiesbag",
+    "stock": "new",
+    "prod_img": "https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1671091686%2Fmy-uploads%2Fukz8f4arqwi1rkz0t4gi.jpg&w=1920&q=75",
+    "prod_name": "Premium Quality Luxury Ladies Hand Bag with Top Handle For Girls",
+    "prod_star": "",
+    "prod_color_no": 3,
+    "prod_strike_price": 29,
+    "prod_price": 26,
+    "available_no": 8
+  }
+]

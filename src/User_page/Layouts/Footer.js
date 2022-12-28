@@ -276,6 +276,8 @@ const useStyles = makeStyles({
   },
   form_div: {
     display: " flex  !important",
+    alignItems: "center",
+    justifyContent: "center",
     flexDirection: " column !important",
     padding: " 50px 16px !important",
     borderRadius: " 16px !important",

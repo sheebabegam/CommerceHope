@@ -8,6 +8,8 @@ import All_category from "./User_page/assets/JSON_data/All_category.json";
 import Feature_prod from "./User_page/assets/JSON_data/Feature_prod.json";
 import ProductPage from "./User_page/Pages/ProductPage";
 import ProductDetails from "./User_page/Pages/ProductDetails";
+import RelatedProducts from "./User_page/assets/JSON_data/RelatedProducts.json";
+import ProductGridView from "./User_page/Pages/ProductGridView";
 
 function App() {
   return (
@@ -35,7 +37,11 @@ function App() {
         />
         <Route
           path="/commercehope/product-details"
-          element={<ProductDetails />}
+          element={<ProductDetails RelatedProducts={RelatedProducts} />}
+        />
+        <Route
+          path="/commercehope/product-list-view"
+          element={<ProductGridView />}
         />
       </Routes>
     </div>
