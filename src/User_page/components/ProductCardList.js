@@ -40,7 +40,13 @@ function ProductCardList(props) {
 
   return (
     <>
-      <div style={{ border: "1px solid rgba(145, 158, 171, 0.24)" }}>
+      <div
+        style={{
+          border: "1px solid rgba(145, 158, 171, 0.24)",
+          marginLeft: 15,
+          marginTop: 15,
+        }}
+      >
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <div

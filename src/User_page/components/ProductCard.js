@@ -12,7 +12,6 @@ import star from "../assets/images/star.png";
 
 function Prod_Card(props) {
   const classes = useStyles();
-  console.log("PPPPP", props);
 
   const {
     prod_img,

@@ -16,6 +16,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ProductCardList from "../components/ProductCardList";
 import ProductCard from "../components/ProductCard";
+import All_data from "../assets/JSON_data/All_data.json";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import usePagination from "./Pagination";
 
 function ProductPage(props) {
   const classes = useStyles();
@@ -24,17 +28,37 @@ function ProductPage(props) {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  console.log(props);
+  // console.log(props);
+
+  // const maps = All_data.find((data) => {
+  //   return data.category == "women";
+  // });
+
+  // console.log("MAPSSSS", maps);
 
   const [view, setView] = useState("grid");
 
-  let Grid_prod = props.All_category.map((card, i) => {
+  let [page, setPage] = useState(1);
+  const PER_PAGE = 8;
+
+  const count = Math.ceil(props.All_data.length / PER_PAGE);
+  const selectedUsers = usePagination(props.All_data, PER_PAGE);
+
+  console.log("Selected USERS", selectedUsers);
+
+  const handleChange1 = (e, p) => {
+    setPage(p);
+    selectedUsers.jump(p);
+  };
+
+  let Grid_prod = selectedUsers.currentData().map((card, i) => {
     return <ProductCard card={card} key={i} />;
   });
 
-  let List_prod = props.All_category.map((card, i) => {
+  let List_prod = selectedUsers.currentData().map((card, i) => {
     return <ProductCardList card={card} key={i} />;
   });
+
   return (
     <div>
       <Navbar />
@@ -244,16 +268,60 @@ function ProductPage(props) {
                     </Grid>
                   )}
 
-                  {view === "list" && (
-                    <Grid
-                      container
-                      spacing={2}
-                      className={classes.grid_padding}
-                    >
-                      {List_prod}
-                    </Grid>
-                  )}
+                  {view === "list" && <div>{List_prod}</div>}
                 </div>
+              </div>
+              {/* <div>
+                <div className={classes.pagination_flex_div}>
+                  <Button onClick={getPrevious}>
+                    <svg
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-k2nkbn"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="NavigateBeforeIcon"
+                      height={22}
+                      width={22}
+                      fill="white"
+                    >
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                    </svg>
+                  </Button>
+                  <Button>1</Button>
+                  <Button>2</Button>
+                  <Button>3</Button>
+                  <Button>4</Button>
+                  <Button onClick={getNext}>
+                    <svg
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-k2nkbn"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="NavigateNextIcon"
+                      height={22}
+                      width={22}
+                      fill="white"
+                    >
+                      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                    </svg>
+                  </Button>
+                </div>
+              </div> */}
+              <div className={classes.pagination_flex_div}>
+                <Stack spacing={2} style={{ color: "white" }}>
+                  <Pagination
+                    classes={{ ul: classes.ul }}
+                    color="primary"
+                    variant="outlined"
+                    shape="rounded"
+                    count={count}
+                    size="large"
+                    page={page}
+                    onChange={handleChange1}
+                    style={{ color: "white" }}
+                    inputProps={{ color: "white" }}
+                  />
+                </Stack>
               </div>
             </Grid>
           </Grid>
@@ -390,6 +458,19 @@ const useStyles = makeStyles({
     overflow: "visible",
     color: "rgb(145, 158, 171) !important",
     transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+  },
+  pagination_flex_div: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+  },
+  ul: {
+    "& .MuiPaginationItem-root": {
+      color: "#fff",
+      border: "1px solid gray",
+      height: 30,
+    },
   },
 });
 
