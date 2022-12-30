@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Layouts/Navbar";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@mui/material";
@@ -19,9 +19,57 @@ import AccountText from "../components/AccountText";
 import FormContainer from "../components/FormContainer";
 import FormMainHeading from "../components/FormMainHeading";
 import FormSubHeading from "../components/FormSubHeading";
+import RegisterNoReuse from "../Pages/RegisterNoReuse";
+import { v4 as uuidv4 } from "uuid";
+import api from "../../api/userInfo";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import TextField from "@mui/material/TextField";
+import { styled } from "@mui/material/styles";
+
+import axios from "axios";
 
 function Login() {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  // Compare data
+  const [APIData, setAPIData] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:4000/userInfo`).then((response) => {
+      setAPIData(response.data);
+    });
+  }, []);
+
+  const LOCAL_STORAGE_KEY = "userInfo";
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const mySubmit = () => {
+    for (let i = 0; i < APIData.length; i++) {
+      let input_email = document.getElementById("email").value;
+      let matchContact = APIData[i].email == input_email;
+      if (matchContact) {
+        let input_password = document.getElementById("password").value;
+        if (APIData[i].password == input_password) {
+          console.log("You Are Successfully Logged In");
+          console.log("APIData is", APIData[i]);
+          localStorage.setItem("userdata", JSON.stringify(APIData[i]));
+          navigate("/commercehope");
+        } else {
+          console.log("Incorrect password");
+        }
+      } else {
+        console.log("This is not a registerd email");
+      }
+    }
+  };
+
   return (
     <div className={classes.color_main_div}>
       <Navbar />
@@ -32,73 +80,108 @@ function Login() {
           <FormMainHeading>Login</FormMainHeading>
           <FormSubHeading>Login to your account to continue</FormSubHeading>
 
-          <div>
-            <ReusableInput
-              label="Email Address"
+          <form className={classes.form} onSubmit={handleSubmit(mySubmit)}>
+            <CssTextField
+              className={classes.fields}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
               name="email"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon style={{ color: "white" }} />
-                  </InputAdornment>
-                ),
+              multiline
+              inputProps={{ style: { color: "white" } }}
+              InputLabelProps={{
+                style: {
+                  color: "white",
+                },
               }}
-              //  value={}
-              //  onChange={(e) => setFirstname(e.target.value)}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3,4}$/i,
+                  message: "This is not a valid email",
+                },
+              })}
             />
 
-            <ReusableInput
+            <CssTextField
+              className={classes.fields}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="password"
               label="Password"
               name="password"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon style={{ color: "white" }} />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <VisibilityOffIcon style={{ color: "white" }} />
-                  </InputAdornment>
-                ),
+              multiline
+              inputProps={{ style: { color: "white" } }}
+              InputLabelProps={{
+                style: {
+                  color: "white",
+                },
               }}
-              //  value={}
-              //  onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className={classes.check_div}>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Remember me"
-              />
-            </FormGroup>
-            <a
-              href="/commercehope/forget-password"
-              className={classes.forget_pass}
-            >
-              Forget Password
-            </a>
-          </div>
-          <div>
-            <FormButton>Login</FormButton>
-          </div>
+              {...register("password", {
+                required: "Password is required",
+                pattern: {
+                  value:
+                    /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{4})/i,
+                  message:
+                    "Must contain at least  1 Lower alphabet, 1 Upper alphabet, 1 Number & a special character",
+                },
 
-          <div>
-            <AccountText>
-              <p style={{ color: "white" }}>
-                {" "}
-                Don’t have an account? &nbsp;
-                <a
-                  href="/commercehope/register"
-                  style={{ color: "rgb(0, 125, 252)" }}
-                >
-                  Get started
-                </a>
-              </p>
-            </AccountText>
-            <TermsText></TermsText>
-          </div>
+                maxLength: {
+                  value: 10,
+                  message: "Password cannot exceed more than 10 Characters",
+                },
+              })}
+            />
+            <div className={classes.check_div}>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="Remember me"
+                />
+              </FormGroup>
+              <a
+                href="/commercehope/forget-password"
+                className={classes.forget_pass}
+              >
+                Forget Password
+              </a>
+            </div>
+            <div>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                // onClick={loginSubmit}
+                data-toggle="modal"
+              >
+                Login
+              </Button>
+            </div>
+
+            <div>
+              <AccountText>
+                <p style={{ color: "white" }}>
+                  {" "}
+                  Don’t have an account? &nbsp;
+                  <a
+                    href="/commercehope/register"
+                    // href="/commercehope/register-reuse"
+                    style={{ color: "rgb(0, 125, 252)" }}
+                  >
+                    Get started
+                  </a>
+                </p>
+              </AccountText>
+              <TermsText></TermsText>
+            </div>
+          </form>
         </FormContainer>
       </div>
 
@@ -167,4 +250,26 @@ const useStyles = makeStyles({
     fontFamily: "Montserrat !important",
     color: "rgb(0, 125, 252)",
   },
+});
+
+const CssTextField = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "#9c9a9a",
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#9c9a9a",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#9c9a9a",
+    },
+    "&:hover fieldset": {
+      borderColor: "pink",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#9c9a9a",
+    },
+  },
+  fontFamily: "Montserrat !important",
+  height: "70px !important",
 });

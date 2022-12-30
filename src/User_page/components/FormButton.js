@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 
 function FormButton(props) {
   const classes = useStyles();
-  const { onClick, children } = props;
+  const { onClick, children, type } = props;
 
   return (
     <Button
@@ -12,6 +12,7 @@ function FormButton(props) {
       className={classes.login_btn}
       style={{ fontWeight: 700, marginTop: 20, marginBottom: 20 }}
       onClick={onClick}
+      type={type}
     >
       {children}
     </Button>

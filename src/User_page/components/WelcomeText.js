@@ -7,7 +7,7 @@ function WelcomeText(props) {
   //   const { onClick, children } = props;
 
   return (
-    <div>
+    <div className={classes.head_main_div}>
       <div className={classes.login_main_div}>
         <Typography
           variant="h3"
@@ -41,7 +41,7 @@ const useStyles = makeStyles({
   },
   welcome_login: {
     margin: "0px",
-    fontSize: "3rem",
+    fontSize: "2rem",
     fontFamily: "Montserrat !important",
     textAlign: "center",
     fontWeight: 300,
@@ -50,20 +50,27 @@ const useStyles = makeStyles({
   },
   comm_login: {
     margin: "0px",
-    fontSize: "4rem",
+    fontSize: "3rem",
     fontFamily: "Montserrat !important",
     textAlign: "center",
     fontWeight: 700,
     lineHeight: 1.33333,
     color: "rgb(255, 255, 255)",
+    marginTop: 10,
   },
   para_login: {
     margin: "0px",
-    fontSize: "1.3rem",
+    fontSize: "1rem",
     fontFamily: "Montserrat !important",
     textAlign: "center",
     fontWeight: 400,
     lineHeight: 0.9,
     color: "rgb(255, 255, 255)",
+    marginTop: 10,
+  },
+  head_main_div: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

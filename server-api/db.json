@@ -1,4 +1,49 @@
 {
-  "userInfo": [],
-  "orderData": []
+  "userInfo": [
+    {
+      "id": "e425a856-341b-4c99-a62c-63c1d8d87739",
+      "firstname": "John",
+      "lastname": "Abraham",
+      "gender": "male",
+      "phone": "9652314785",
+      "email": "john@gmail.com",
+      "password": "John123*"
+    },
+    {
+      "id": "526e2843-ede3-4c6a-aa75-ebbf2cc288e5",
+      "firstname": "Gowthaman",
+      "lastname": "S",
+      "gender": "male",
+      "phone": "9791677558",
+      "email": "gowthaman@gmail.com",
+      "password": "Gowtham12!"
+    },
+    {
+      "id": "3338fe07-787f-47fe-81ec-11520b3ca89f",
+      "firstname": "Gowthaman",
+      "lastname": "S",
+      "gender": "male",
+      "phone": "9791677558",
+      "email": "gowthaman@gmail.com",
+      "password": "Gowtham12!"
+    },
+    {
+      "id": "427b1d10-e71e-46d5-b45f-6266aa8e1562",
+      "firstname": "Gowthaman",
+      "lastname": "S",
+      "gender": "male",
+      "phone": "9791677558",
+      "email": "gowthaman@gmail.com",
+      "password": "Gowtham12!"
+    },
+    {
+      "id": "a4b377db-6db6-4378-a05c-1057feb5c6fb",
+      "firstname": "Gowthaman",
+      "lastname": "S",
+      "gender": "male",
+      "phone": "9791677558",
+      "email": "gowthaman@gmail.com",
+      "password": "Gowtham12!"
+    }
+  ]
 }

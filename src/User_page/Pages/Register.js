@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Navbar from "../Layouts/Navbar";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@mui/material";
@@ -24,7 +24,7 @@ import axios from "axios";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import Select from "@mui/material/Select";
 import NativeSelect from "@mui/material/NativeSelect";
 import WelcomeText from "../components/WelcomeText";
 import FormContainer from "../components/FormContainer";
@@ -32,65 +32,46 @@ import FormMainHeading from "../components/FormMainHeading";
 import FormSubHeading from "../components/FormSubHeading";
 import TermsText from "../components/TermsText";
 import AccountText from "../components/AccountText";
+import Select from "react-select";
 
 function Register() {
   const classes = useStyles();
   const navigate = useNavigate();
 
-  const [gender, setGender] = useState("");
-
-  const handleChange = (event) => {
-    setGender(event.target.value);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [userInfo, setuserInfo] = useState([]);
+  const retriveContacts = async () => {
+    const response = await api.get("/userInfo");
+    return response.data;
   };
-  console.log("Age", gender);
+  // const onSubmit = (data) => console.log(data);
+  const mySubmit = async (data) => {
+    console.log(data);
 
-  // const LOCAL_STORAGE_KEY = "contacts";
+    const request = {
+      id: uuidv4(),
+      ...data,
+    };
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
-  // const [userInfo, setuserInfo] = useState([]);
+    const response = await api.post("/userInfo", request);
+    console.log(response);
+    setuserInfo([...userInfo, response.data]);
+  };
 
-  // console.log(userInfo);
+  useEffect(() => {
+    // const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    // if (retriveContacts) setuserInfo(retriveContacts);
 
-  // const retriveContacts = async () => {
-  //   const response = await api.get("/userInfo");
-  //   return response.data;
-  // };
-
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-  //   const request = {
-  //     id: uuidv4(),
-  //     ...data,
-  //   };
-
-  //   const response = await api.post("/userInfo", request);
-  //   console.log(response);
-  //   setuserInfo([...userInfo, response.data]);
-  // };
-
-  // useEffect(() => {
-  //   // const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-  //   // if (retriveContacts) setuserInfo(retriveContacts);
-
-  //   const getContacts = async () => {
-  //     const allContacts = await retriveContacts();
-  //     if (allContacts) setuserInfo(allContacts);
-  //   };
-  //   getContacts();
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(userInfo));
-  // }, [userInfo]);
-
-  // const contacts = async () => {
-  //   const response = await api.get("/userInfo");
-  //   return response.data;
-  // };
+    const getContacts = async () => {
+      const allContacts = await retriveContacts();
+      if (allContacts) setuserInfo(allContacts);
+    };
+    getContacts();
+  }, []);
 
   return (
     <div className={classes.color_main_div}>
@@ -101,130 +82,187 @@ function Register() {
         <FormContainer>
           <FormMainHeading>Get Started</FormMainHeading>
           <FormSubHeading>Create an account for free.</FormSubHeading>
-          <div>
+          <form className={classes.form} onSubmit={handleSubmit(mySubmit)}>
             <div className={classes.flex_reg_div}>
-              <ReusableInput
+              <CssTextField
+                className={classes.fields}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="firstname"
                 label="First Name"
                 name="firstname"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
-                    </InputAdornment>
-                  ),
+                multiline
+                inputProps={{ style: { color: "white" } }}
+                InputLabelProps={{
+                  style: {
+                    color: "white",
+                  },
                 }}
-                // {...register("firstname", {
-                //   required: "First Name is required",
-                // })}
+                {...register("firstname", {
+                  required: "First Name is required",
+                })}
               />
+              {errors.firstname && (
+                <small className={classes.small_txt}>
+                  {errors.firstname.message}
+                </small>
+              )}
               &nbsp; &nbsp;
-              <ReusableInput
+              <CssTextField
+                className={classes.fields}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="lastname"
                 label="Last Name"
                 name="lastname"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
-                    </InputAdornment>
-                  ),
+                multiline
+                inputProps={{ style: { color: "white" } }}
+                InputLabelProps={{
+                  style: {
+                    color: "white",
+                  },
                 }}
-                // {...register("firstname", {
-                //   required: "Last Name is required",
-                // })}
+                {...register("lastname", {
+                  required: "Last Name is required",
+                })}
               />
+              {errors.lastname && (
+                <small className={classes.small_txt}>
+                  {errors.lastname.message}
+                </small>
+              )}
             </div>
 
             <div className={classes.flex_reg_div}>
-              <FormControl fullWidth>
-                <InputLabel
-                  variant="outlined"
-                  style={{ color: "white" }}
-                  // margin="normal"
-                  // htmlFor="uncontrolled-native"
-                  // id="demo-simple-select-label"
-                >
-                  Gender
-                </InputLabel>
-                <Select
-                  // labelId="demo-simple-select-label"
-                  // id="demo-simple-select"
-                  label="Gender"
-                  value={gender}
-                  onChange={handleChange}
-                  defaultValue={30}
-                  style={{
-                    border: "1px solid rgb(133, 133, 133)",
-                    color: "white",
-                  }}
-                  inputProps={{
-                    name: "gender",
-                    // id: "uncontrolled-native",
-                  }}
-                  // {...register("gender", {
-                  //   required: "Last Name is required",
-                  // })}
-                >
-                  <MenuItem value={"male"}>Male</MenuItem>
-                  <MenuItem value={"female"}>Female</MenuItem>
-                </Select>
-              </FormControl>
+              <select
+                {...register("gender", {
+                  required: "Please select gender",
+                })}
+                className={classes.select_option}
+                label="Gender"
+              >
+                <option value="">Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              {errors.gender && (
+                <small className={classes.small_txt}>
+                  {errors.gender.message}
+                </small>
+              )}
               &nbsp; &nbsp;
-              <ReusableInput
-                label="Phone No"
+              <CssTextField
+                className={classes.fields}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="phone"
+                label="Phone"
                 name="phone"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
-                    </InputAdornment>
-                  ),
+                multiline
+                inputProps={{ style: { color: "white" } }}
+                InputLabelProps={{
+                  style: {
+                    color: "white",
+                  },
                 }}
-
-                //  value={}
-                //  onChange={(e) => setFirstname(e.target.value)}
+                {...register("phone", {
+                  required: "Phone number is required",
+                })}
               />
+              {errors.phone && (
+                <small className={classes.small_txt}>
+                  {errors.phone.message}
+                </small>
+              )}
             </div>
-            <ReusableInput
-              label="Email Address"
+            <CssTextField
+              className={classes.fields}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
               name="email"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon style={{ color: "rgb(145, 158, 171)" }} />
-                  </InputAdornment>
-                ),
+              multiline
+              inputProps={{ style: { color: "white" } }}
+              InputLabelProps={{
+                style: {
+                  color: "white",
+                },
               }}
-
-              //  value={}
-              //  onChange={(e) => setFirstname(e.target.value)}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3,4}$/i,
+                  message: "This is not a valid email",
+                },
+              })}
             />
+            {errors.email && (
+              <small className={classes.small_txt}>
+                {errors.email.message}
+              </small>
+            )}
 
-            <ReusableInput
+            <CssTextField
+              className={classes.fields}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="password"
               label="Password"
               name="password"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon style={{ color: "rgb(145, 158, 171)" }} />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <VisibilityOffIcon
-                      style={{ color: "rgb(145, 158, 171)" }}
-                    />
-                  </InputAdornment>
-                ),
+              multiline
+              inputProps={{ style: { color: "white" } }}
+              InputLabelProps={{
+                style: {
+                  color: "white",
+                },
               }}
+              {...register("password", {
+                required: "Password is required",
+                pattern: {
+                  value:
+                    /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{4})/i,
+                  message:
+                    "Must contain at least  1 Lower alphabet, 1 Upper alphabet, 1 Number & a special character",
+                },
 
-              //  value={}
-              //  onChange={(e) => setFirstname(e.target.value)}
+                maxLength: {
+                  value: 10,
+                  message: "Password cannot exceed more than 10 Characters",
+                },
+              })}
             />
-          </div>
+            <br />
+            {errors.password && (
+              <small className={classes.small_txt}>
+                {errors.password.message}
+              </small>
+            )}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              data-toggle="modal"
+            >
+              Register
+            </Button>
+          </form>
 
-          <div>
-            <FormButton>Register</FormButton>
-          </div>
+          {/* <div>
+            <FormButton type="submit">Register</FormButton>
+          </div> */}
           <div>
             <AccountText>
               <p style={{ color: "white" }}>
@@ -253,6 +291,10 @@ export default Register;
 const useStyles = makeStyles({
   color_main_div: {
     backgroundColor: "#1A2138 !important",
+  },
+  small_txt: {
+    fontSize: 12,
+    color: "red",
   },
 
   // login_h4: {
@@ -302,6 +344,15 @@ const useStyles = makeStyles({
     fontFamily: "Montserrat !important",
     color: "rgb(0, 125, 252)",
   },
+  select_option: {
+    width: "100% !important",
+    height: "56px !important",
+    backgroundColor: "#1A2138 !important",
+    borderRadius: "4px !important",
+    color: "white !important",
+    fontSize: "1rem !important",
+    marginTop: "-6px !important",
+  },
   // get_started: {
   //   textDecoration: "none",
   //   fontSize: "16px",
@@ -321,4 +372,26 @@ const useStyles = makeStyles({
   // account_agree: {
   //   color: "rgb(145, 158, 171)",
   // },
+});
+
+const CssTextField = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "#9c9a9a",
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#9c9a9a",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#9c9a9a",
+    },
+    "&:hover fieldset": {
+      borderColor: "pink",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#9c9a9a",
+    },
+  },
+  fontFamily: "Montserrat !important",
+  height: "70px !important",
 });

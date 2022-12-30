@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     zIndex: 0,
     border: " 1px solid rgba(145, 158, 171, 0.24)",
     transition: "all 0.3s ease-in-out 0s",
-    maxWidth: "650px",
+    maxWidth: "530px",
     margin: "-80px auto auto",
     flexDirection: "column",
     justifyContent: "center",
