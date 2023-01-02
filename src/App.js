@@ -12,6 +12,7 @@ import RelatedProducts from "./User_page/assets/JSON_data/RelatedProducts.json";
 import ProductGridView from "./User_page/Pages/ProductGridView";
 import All_data from "./User_page/assets/JSON_data/All_data.json";
 import RegisterNoReuse from "./User_page/Pages/RegisterNoReuse";
+import Checkout from "./User_page/Pages/Checkout";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           path="/commercehope/product-list-view"
           element={<ProductGridView />}
         />
+        <Route path="/commercehope/product-checkout" element={<Checkout />} />
       </Routes>
     </div>
   );

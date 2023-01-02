@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import star from "../assets/images/star.png";
+import { useLocation } from "react-router-dom";
 
 function Prod_Card(props) {
   const classes = useStyles();
@@ -20,18 +21,26 @@ function Prod_Card(props) {
     prod_star,
     prod_strike_price,
     prod_price,
+    onClick,
   } = props.card;
-
+  // console.log(props.onClick);
   return (
     <>
       <Grid item xs={12} sm={3}>
-        <Card className={classes.root}>
+        <Card
+          className={classes.root}
+          style={{ width: 260, marginRight: 20, marginBottom: 20 }}
+        >
           <CardActionArea>
-            <CardMedia className={classes.media} image={prod_img} />
+            <CardMedia
+              className={classes.media}
+              image={prod_img}
+              // style={{ width: 350 }}
+            />
             <div className={classes.sale_tag_div}>
               <span className={classes.avail_tag_span}>{stock}</span>
             </div>
-            <CardContent>
+            <CardContent style={{ padding: 6 }}>
               <Typography
                 gutterBottom
                 variant="h5"
@@ -62,11 +71,12 @@ function Prod_Card(props) {
               </div>
             </CardContent>
           </CardActionArea>
-          <CardActions style={{ marginTop: "-27px !important" }}>
+          <CardActions style={{ marginTop: "-27px" }}>
             <Button
               variant="contained"
               className={classes.add_to_cart_btn}
               style={{ fontWeight: 700 }}
+              onClick={props.onClick}
             >
               Add To Cart
             </Button>
@@ -98,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex !important",
     alignItems: "center !important",
     justifyContent: "end !important",
-    marginTop: 30,
+    // marginTop: 30,
     marginRight: 25,
   },
   avail_tag_span: {
@@ -123,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis !important",
     whiteSpace: "nowrap !important",
     overflow: "hidden !important",
-    fontSize: "1.2rem !important",
+    fontSize: "1rem !important",
   },
   star_img: {
     height: "22px",
@@ -220,6 +230,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center !important",
   },
   media: {
-    height: 350,
+    height: 270,
+    width: "100%",
+    objectFit: "cover",
   },
 }));

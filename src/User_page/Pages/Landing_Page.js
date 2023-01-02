@@ -14,6 +14,8 @@ import Grid from "@mui/material/Grid";
 import Footer from "../Layouts/Footer";
 import ProductCard from "../components/ProductCard";
 import ViewAllbtn from "../components/ViewAllbtn";
+import { Container } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
 
 function Landing_Page(props) {
   const classes = useStyles();
@@ -70,14 +72,47 @@ function Landing_Page(props) {
     setWomen("");
     setKids("kids");
   };
+  // const cart = useSelector((state) => state.addToCart);
+  const dispatch = useDispatch();
+
+  const addcart = (e) => {
+    console.log("hjjkhj");
+    localStorage.setItem("myproduct", JSON.stringify(e));
+  };
+
   console.log("PRPOS", props.All_category);
 
   let All_categ = props.All_category.map((card, i) => {
-    return <ProductCard card={card} key={i} />;
+    return (
+      <Link
+        to={{ pathname: "/commercehope/product-details" }}
+        state={{ id: card }}
+      >
+        <ProductCard
+          card={card}
+          key={i}
+          // onClick={() => {
+          //   dispatch({ type: "ADD", payload: card });
+          //   addcart(card);
+          // }}
+        />
+      </Link>
+    );
   });
+
   let Featured = props.Feature_prod.map((card, i) => {
-    return <ProductCard maxColumns={3} card={card} key={i} />;
+    return (
+      <Link
+        to={{ pathname: "/commercehope/product-details" }}
+        state={{ id: card }}
+      >
+        <ProductCard card={card} key={i} />
+      </Link>
+    );
   });
+  // let Featured = props.Feature_prod.map((card, i) => {
+  //   return <ProductCard maxColumns={3} card={card} key={i} />;
+  // });
 
   return (
     <div className={classes.whole_div}>
@@ -179,11 +214,20 @@ function Landing_Page(props) {
           </Link>
         </div>
 
-        <Link to="/commercehope/product-details">
-          <Grid container spacing={2} className={classes.grid_padding}>
+        {/* <Link to= {{pathname: "/commercehope/product-details"}} state={{ id: product }}> */}
+        <Grid container spacing={2} className={classes.grid_padding}>
+          <Container
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
             {All_categ}
-          </Grid>
-        </Link>
+          </Container>
+        </Grid>
+        {/* </Link> */}
 
         <ViewAllbtn> View All </ViewAllbtn>
 
@@ -194,7 +238,16 @@ function Landing_Page(props) {
             </Typography>
           </div>
           <Grid container spacing={2} className={classes.grid_padding}>
-            {Featured}
+            <Container
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              {Featured}
+            </Container>
           </Grid>
           <Link to="/commercehope/product-page">
             <ViewAllbtn> View All </ViewAllbtn>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,9 +24,17 @@ import Description from "./Description";
 import Reviews from "./Reviews";
 import ProductCardRelated from "../components/ProductCardRelated";
 import Footer from "../Layouts/Footer";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function ProductDetails(props) {
   const classes = useStyles();
+  const location = useLocation();
+  const loc_data = location.state.id;
+  console.log("LOCATION DATA", loc_data);
+  // console.log("CARD details", props);
+
   const [age, setAge] = React.useState("");
   const [tab, setTab] = useState("description");
   const handleChange = (event) => {
@@ -35,6 +43,26 @@ function ProductDetails(props) {
   let RelatedProducts = props.RelatedProducts.map((card, i) => {
     return <ProductCardRelated card={card} key={i} />;
   });
+
+  var cart = useSelector((state) => state.addToCart);
+  const dispatch = useDispatch();
+  var cart = localStorage.getItem("cart", JSON.stringify(cart));
+  const [addCart, setAddCart] = useState([]);
+
+  const addcart = (loc_data, e) => {
+    console.log("Before Add", addCart);
+    // addCart.push(loc_data);
+    // setAddCart([...addCart]);
+    setAddCart((prevData) => [...prevData, loc_data]);
+    console.log("After Added", addCart);
+    localStorage.setItem("cart", JSON.stringify([...addCart], e));
+  };
+
+  useEffect(() => {
+    var carts = localStorage.getItem("cart", JSON.stringify(cart));
+    var cart_details = JSON.parse(carts);
+    console.log(cart_details);
+  }, [cart]);
   return (
     <div className={classes.whole_div}>
       <Navbar />
@@ -56,8 +84,7 @@ function ProductDetails(props) {
               className={classes.product_name_crumb}
               style={{ fontWeight: 400 }}
             >
-              &nbsp; Gaming headset with mic for pc ps4 xbox one over ear
-              headphones a1 s
+              &nbsp; {loc_data.prod_name}
             </p>
           </div>
         </div>
@@ -68,7 +95,7 @@ function ProductDetails(props) {
                 <Grid item xs={6}>
                   <div>
                     <img
-                      src="https://app.commercehope.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Ftechgater%2Fimage%2Fupload%2Fv1669211883%2Fmy-uploads%2Fhlrdgjqpljpkfyphrpgh.jpg&w=1920&q=75"
+                      src={loc_data.prod_img}
                       alt="headphones"
                       className={classes.prod_img_div}
                     />
@@ -81,11 +108,10 @@ function ProductDetails(props) {
                         className={classes.prod_det_span}
                         style={{ fontWeight: 700 }}
                       >
-                        SALE
+                        {loc_data.stock}
                       </span>
                       <p className={classes.prod_det_name}>
-                        Women Bag Ladies Leather Tote Fashion Shoulder Bags for
-                        Women 2022 Wallet
+                        {loc_data.prod_name}
                       </p>
                     </div>
                     <div className={classes.star_review_div}>
@@ -129,14 +155,14 @@ function ProductDetails(props) {
 
                       <div>
                         <span className={classes.prod_det_strike_price}>
-                          $30.0
+                          ${loc_data.prod_strike_price}.0
                         </span>
                         &nbsp;
                         <span
                           className={classes.prod_det_actual_price}
                           style={{ fontWeight: 700 }}
                         >
-                          $27.0
+                          ${loc_data.prod_price}.0
                         </span>
                       </div>
                     </div>
@@ -303,7 +329,7 @@ function ProductDetails(props) {
                               className={classes.helper_txt_prod_det}
                               style={{ fontWeight: 400 }}
                             >
-                              Available: 20
+                              Available: {loc_data.available_no}
                             </FormHelperText>
                           </Box>
                         </div>
@@ -325,6 +351,13 @@ function ProductDetails(props) {
                               color: "rgb(33, 43, 54)",
                               fontSize: "0.9375rem",
                             }}
+                            onClick={(e) => {
+                              dispatch({
+                                type: "ADD",
+                                payload: loc_data,
+                              });
+                              addcart(loc_data, e);
+                            }}
                           >
                             <svg
                               class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
@@ -342,16 +375,21 @@ function ProductDetails(props) {
                           </ProductAddToCart>
                         </Grid>
                         <Grid item xs={6}>
-                          <ProductAddToCart
-                            style={{
-                              backgroundColor: "rgb(0, 125, 252)",
-                              color: "white",
-                              fontWeight: 700,
-                              fontSize: "0.9375rem",
-                            }}
+                          <Link
+                            to={{ pathname: "/commercehope/product-checkout" }}
+                            state={{ id: loc_data }}
                           >
-                            Buy Now
-                          </ProductAddToCart>
+                            <ProductAddToCart
+                              style={{
+                                backgroundColor: "rgb(0, 125, 252)",
+                                color: "white",
+                                fontWeight: 700,
+                                fontSize: "0.9375rem",
+                              }}
+                            >
+                              Buy Now
+                            </ProductAddToCart>
+                          </Link>
                         </Grid>
                       </Grid>
                     </div>
