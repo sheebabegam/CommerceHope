@@ -72,15 +72,6 @@ function Landing_Page(props) {
     setWomen("");
     setKids("kids");
   };
-  // const cart = useSelector((state) => state.addToCart);
-  const dispatch = useDispatch();
-
-  const addcart = (e) => {
-    console.log("hjjkhj");
-    localStorage.setItem("myproduct", JSON.stringify(e));
-  };
-
-  console.log("PRPOS", props.All_category);
 
   let All_categ = props.All_category.map((card, i) => {
     return (
@@ -91,6 +82,7 @@ function Landing_Page(props) {
         <ProductCard
           card={card}
           key={i}
+          style={{ textDecoration: "none" }}
           // onClick={() => {
           //   dispatch({ type: "ADD", payload: card });
           //   addcart(card);
@@ -116,7 +108,7 @@ function Landing_Page(props) {
 
   return (
     <div className={classes.whole_div}>
-      <Navbar />
+      {/* <Navbar /> */}
       <div>
         <Carousel>
           {items.map((item, i) => (

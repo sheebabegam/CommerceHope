@@ -22,6 +22,7 @@ import ModalCard from "../components/ModalCard";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Popover from "@mui/material/Popover";
+import { useSelector, useDispatch } from "react-redux";
 
 const pages = ["Register", "Login"];
 
@@ -32,6 +33,8 @@ const Navbar = () => {
   const handleClose = () => setOpen(false);
   const [beforeSearch, setBeforeSearch] = useState(true);
   const [search, setSearch] = useState(false);
+
+  const qty = useSelector((state) => state._todoProduct);
 
   const [value, setValue] = useState("");
 
@@ -63,6 +66,10 @@ const Navbar = () => {
 
   const open1 = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const cart = useSelector((state) => state);
+  console.log("Navbar Cart", cart);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -177,7 +184,8 @@ const Navbar = () => {
                 </span>
               </Link>
               <Link
-                to="/commercehope"
+                // to="/commercehope"
+                to="/commercehope/product-checkout"
                 sx={{
                   textDecoration: "none",
                   backgroundColor: "#6439ff",
@@ -191,7 +199,7 @@ const Navbar = () => {
                   className={classes.nav_icon_color}
                   style={{ fontFamily: "Montserrat" }}
                 >
-                  4
+                  {qty.numberCart}
                 </span>
               </Link>
               {/* <Link
@@ -701,3 +709,37 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
+// ************************************************************************************
+
+// import React, { Component } from "react";
+// import { Link } from "react-router-dom";
+// import { useSelector } from "react-redux";
+
+// function Header() {
+//   const qty = useSelector((state) => state._todoProduct);
+
+//   console.log(qty.numberCart);
+//   return (
+//     <div className="row">
+//       <div className="col-md-12">
+//         <nav className="navbar  navbar-dark bg-dark ">
+//           <ul className="nav">
+//             <li className="nav-item">
+//               <Link to="/" className="nav-link active">
+//                 Products
+//               </Link>
+//             </li>
+//             <li className="nav-item">
+//               <Link to="/commercehope/product-checkout" className="nav-link">
+//                 Carts : {qty.numberCart}
+//               </Link>
+//             </li>
+//           </ul>
+//         </nav>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Header;

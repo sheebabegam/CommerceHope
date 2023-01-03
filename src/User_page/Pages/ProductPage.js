@@ -61,7 +61,7 @@ function ProductPage(props) {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className={classes.whole_div} style={{ padding: "18px 200px" }}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>

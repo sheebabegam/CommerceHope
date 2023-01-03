@@ -5,23 +5,39 @@ import { makeStyles } from "@material-ui/styles";
 import { Paper, Button, Typography } from "@mui/material";
 import Footer from "../Layouts/Footer";
 import { useLocation } from "react-router-dom";
+import {
+  IncreaseQuantity,
+  DecreaseQuantity,
+  DeleteCart,
+} from "../Redux/actions";
+import AddToCartBtn from "../components/AddToCartBtn";
 
 function Checkout(props) {
   const classes = useStyles();
   const location = useLocation();
-  const loc_cartData = location.state.id;
-  console.log("PROCEED Data", loc_cartData);
+  // const loc_cartData = location.state.id;
+  // console.log("PROCEED Data", loc_cartData);
 
-  var cart = useSelector((state) => state.addToCart);
+  const items = useSelector((state) => state._todoProduct);
+  console.log(items);
+  let ListCart = [];
+  let TotalCart = 0;
+  Object.keys(items.Carts).forEach(function (item) {
+    TotalCart += items.Carts[item].quantity * items.Carts[item].price;
+    ListCart.push(items.Carts[item]);
+  });
+  function TotalPrice(price, qty) {
+    return Number(price * qty);
+  }
+
+  console.log("Total Amount", TotalCart);
+
+  const TotalAmount = TotalCart + 5;
+
   const dispatch = useDispatch();
-
-  var carts = localStorage.getItem("newCart", JSON.stringify("newCart"));
-  var cart_details = JSON.parse(carts);
-
-  console.log("NEEDED Cart", cart_details);
   return (
     <div className={classes.whole_div}>
-      <Navbar />
+      {/* <Navbar /> */}
       <div>
         <div style={{ width: "60%", padding: "0px 390px" }}>
           <div>
@@ -61,12 +77,15 @@ function Checkout(props) {
               >
                 Cart{" "}
                 <span style={{ fontSize: 15, color: "gray" }}>
-                  ({cart_details.length} items)
+                  ({items.numberCart} items)
                 </span>
               </Typography>
             </div>
             <div>
-              <table style={{ color: "white" }}>
+              <table
+                style={{ color: "white" }}
+                className={classes.subtotal_div}
+              >
                 <thead
                   style={{
                     background:
@@ -83,7 +102,7 @@ function Checkout(props) {
                     <th></th>
                   </tr>
                 </thead>
-                {cart_details.map((product, i) => (
+                {ListCart.map((item, key) => (
                   <tbody>
                     <tr style={{ padding: "20px 0px" }}>
                       <td style={{ padding: "20px 0px" }}>
@@ -96,7 +115,7 @@ function Checkout(props) {
                         >
                           <div>
                             <img
-                              src={product.prod_img}
+                              src={item.image}
                               alt=""
                               style={{ height: 64, width: 64, borderRadius: 6 }}
                             />
@@ -107,7 +126,7 @@ function Checkout(props) {
                                 variant="h6"
                                 className={classes.product_name_typo}
                               >
-                                {product.prod_name}
+                                {item.name}
                               </Typography>
                             </div>
                             <div
@@ -134,7 +153,7 @@ function Checkout(props) {
                           </div>
                         </div>
                       </td>
-                      <td>${product.prod_price}.0</td>
+                      <td>${item.price}.0</td>
                       <td>
                         <div>
                           <div
@@ -144,7 +163,9 @@ function Checkout(props) {
                               alignItems: "center",
                             }}
                           >
-                            <Button>
+                            <Button
+                              onClick={() => dispatch(DecreaseQuantity(key))}
+                            >
                               <svg
                                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-26dwcd"
                                 focusable="false"
@@ -158,9 +179,13 @@ function Checkout(props) {
                                 <path d="M18 13H6c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1z"></path>
                               </svg>
                             </Button>
-                            <span style={{ fontSize: 15 }}>QTY</span>
+                            <span style={{ fontSize: 15 }}>
+                              {item.quantity}
+                            </span>
                             <div>
-                              <Button>
+                              <Button
+                                onClick={() => dispatch(IncreaseQuantity(key))}
+                              >
                                 <svg
                                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-26dwcd"
                                   focusable="false"
@@ -178,13 +203,9 @@ function Checkout(props) {
                           </div>
                         </div>
                       </td>
-                      <td>${product.prod_price}.0</td>
+                      <td>${TotalPrice(item.price, item.quantity)}.0</td>
                       <td>
-                        <Button
-                          onClick={() => {
-                            dispatch({ type: "REMOVE", payload: product });
-                          }}
-                        >
+                        <Button onClick={() => DeleteCart(key)}>
                           <svg
                             class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
                             focusable="false"
@@ -205,8 +226,76 @@ function Checkout(props) {
               </table>
             </div>
           </div>
-          <div style={{ width: 400, backgroundColor: "pink" }}>
-            <p>Checkout</p>
+          <div style={{ width: 350 }}>
+            <div style={{ padding: 20 }} className={classes.subtotal_div}>
+              <div>
+                <Typography
+                  variant="h6"
+                  className={classes.checkout_heading}
+                  style={{ fontWeight: 700, textAlign: "left" }}
+                >
+                  Order Summary
+                </Typography>
+              </div>
+              <div className={classes.checkout_table_div}>
+                <div className={classes.checkout_flex_row}>
+                  <p
+                    className={classes.subtotal_para}
+                    style={{ fontWeight: 400, fontSize: "0.75rem" }}
+                  >
+                    Sub Total
+                  </p>
+                  <Typography
+                    variant="h6"
+                    className={classes.subtotal_num}
+                    style={{ fontWeight: 600, fontSize: "0.875rem" }}
+                  >
+                    ${TotalCart}.0
+                  </Typography>
+                </div>
+                <div className={classes.checkout_flex_row}>
+                  <p
+                    className={classes.subtotal_para}
+                    style={{ fontWeight: 400, fontSize: "0.75rem" }}
+                  >
+                    Shipping
+                  </p>
+                  <Typography
+                    variant="h6"
+                    className={classes.subtotal_num}
+                    style={{ fontWeight: 600, fontSize: "0.875rem" }}
+                  >
+                    ${5}.0
+                  </Typography>
+                </div>
+                <hr />
+
+                <div className={classes.checkout_flex_row}>
+                  <p
+                    className={classes.subtotal_para}
+                    style={{ fontWeight: 400, fontSize: "0.75rem" }}
+                  >
+                    Total
+                  </p>
+                  <Typography
+                    variant="h6"
+                    className={classes.subtotal_num}
+                    style={{
+                      fontWeight: 600,
+                      fontSize: "1rem",
+                      color: "rgb(255, 72, 66)",
+                    }}
+                  >
+                    ${TotalAmount}.0
+                  </Typography>
+                </div>
+              </div>
+            </div>
+            <div className={classes.checkout_btn_div}>
+              <AddToCartBtn className={classes.checkout_btn}>
+                Checkout
+              </AddToCartBtn>
+            </div>
           </div>
         </div>
       </div>
@@ -222,7 +311,7 @@ const useStyles = makeStyles({
     backgroundColor: "#1A2138 !important",
   },
   product_details_heading: {
-    margin: " 30px 0px 8px !important",
+    padding: " 30px 0px 8px !important",
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: "2rem !important",
@@ -280,4 +369,123 @@ const useStyles = makeStyles({
     height: "14px !important",
     alignSelf: "center !important",
   },
+  subtotal_div: {
+    backgroundColor: "rgb(26, 33, 56) !important",
+    color: "rgb(255, 255, 255) !important",
+    borderRadius: "4px !important",
+    boxShadow: "none !important",
+    backgroundImage: "none !important",
+    overflow: "hidden !important",
+    position: "relative !important",
+    zIndex: 0,
+    border: "1px solid rgba(145, 158, 171, 0.24) !important",
+    transition: "all 0.3s ease-in-out 0s !important",
+    marginBottom: "24px !important",
+  },
+  checkout_heading: {
+    margin: "0px !important",
+    fontWeight: 700,
+    lineHeight: 1.55556,
+    fontSize: "1.5rem !important",
+    fontFamily: "Montserrat !important",
+    display: "block !important",
+  },
+  checkout_flex_row: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 });
+
+// **********************************************************************
+
+// import React, { Component } from "react";
+// import { connect, useDispatch, useSelector } from "react-redux";
+// import {
+//   IncreaseQuantity,
+//   DecreaseQuantity,
+//   DeleteCart,
+// } from "../Redux/actions";
+
+// function Checkout() {
+//   //  console.log(items)
+//   const items = useSelector((state) => state._todoProduct);
+//   console.log(items);
+//   let ListCart = [];
+//   let TotalCart = 0;
+//   Object.keys(items.Carts).forEach(function (item) {
+//     TotalCart += items.Carts[item].quantity * items.Carts[item].price;
+//     ListCart.push(items.Carts[item]);
+//   });
+//   function TotalPrice(price, tonggia) {
+//     return Number(price * tonggia).toLocaleString("en-US");
+//   }
+
+//   const dispatch = useDispatch();
+//   return (
+//     <div className="row">
+//       <div className="col-md-12">
+//         <table className="table">
+//           <thead>
+//             <tr>
+//               <th></th>
+//               <th>Name</th>
+//               <th>Image</th>
+//               <th>Price</th>
+//               <th>Quantity</th>
+//               <th>Total Price</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {ListCart.map((item, key) => {
+//               return (
+//                 <tr key={key}>
+//                   <td>
+//                     <i
+//                       className="badge badge-danger"
+//                       onClick={() => DeleteCart(key)}
+//                     >
+//                       Delete
+//                     </i>
+//                   </td>
+//                   <td>{item.name}</td>
+//                   <td>
+//                     <img
+//                       src={item.image}
+//                       style={{ width: "100px", height: "80px" }}
+//                     />
+//                   </td>
+//                   <td>{item.price} $</td>
+//                   <td>
+//                     <span
+//                       className="btn btn-primary"
+//                       style={{ margin: "2px" }}
+//                       onClick={() => dispatch(DecreaseQuantity(key))}
+//                     >
+//                       -
+//                     </span>
+//                     <span className="btn btn-info">{item.quantity}</span>
+//                     <span
+//                       className="btn btn-primary"
+//                       style={{ margin: "2px" }}
+//                       onClick={() => dispatch(IncreaseQuantity(key))}
+//                     >
+//                       +
+//                     </span>
+//                   </td>
+//                   <td>{TotalPrice(item.price, item.quantity)} $</td>
+//                 </tr>
+//               );
+//             })}
+//             <tr>
+//               <td colSpan="5">Total Carts</td>
+//               <td>{Number(TotalCart).toLocaleString("en-US")} $</td>
+//             </tr>
+//           </tbody>
+//         </table>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Checkout;

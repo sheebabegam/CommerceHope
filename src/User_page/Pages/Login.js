@@ -72,7 +72,7 @@ function Login() {
 
   return (
     <div className={classes.color_main_div}>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div>
         <WelcomeText />

@@ -27,6 +27,12 @@ import Footer from "../Layouts/Footer";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { actFetchProductsRequest, AddCart } from "../Redux/actions";
+import {
+  IncreaseQuantity,
+  DecreaseQuantity,
+  DeleteCart,
+} from "../Redux/actions";
 
 function ProductDetails(props) {
   const classes = useStyles();
@@ -34,6 +40,12 @@ function ProductDetails(props) {
   const loc_data = location.state.id;
   console.log("LOCATION DATA", loc_data);
   // console.log("CARD details", props);
+
+  const items = useSelector((state) => state._todoProduct);
+  const dispatch = useDispatch();
+  console.log(items);
+
+  localStorage.setItem("items", JSON.stringify(items));
 
   const [age, setAge] = React.useState("");
   const [tab, setTab] = useState("description");
@@ -45,27 +57,33 @@ function ProductDetails(props) {
   });
 
   var cart = useSelector((state) => state.addToCart);
-  const dispatch = useDispatch();
-  var cart = localStorage.getItem("cart", JSON.stringify(cart));
+
+  console.log("redux cart", cart);
+
+  var cart_local = localStorage.getItem("cart", JSON.stringify(cart));
   const [addCart, setAddCart] = useState([]);
+
+  console.log("clear addCart data", addCart);
 
   const addcart = (loc_data, e) => {
     console.log("Before Add", addCart);
+    console.log("LOCATION data", typeof loc_data);
     // addCart.push(loc_data);
     // setAddCart([...addCart]);
+    console.log("update data", loc_data);
+    console.log("pre data", addCart);
     setAddCart((prevData) => [...prevData, loc_data]);
     console.log("After Added", addCart);
     localStorage.setItem("cart", JSON.stringify([...addCart], e));
   };
 
-  useEffect(() => {
-    var carts = localStorage.getItem("cart", JSON.stringify(cart));
-    var cart_details = JSON.parse(carts);
-    console.log(cart_details);
-  }, [cart]);
+  // useEffect(() => {
+  //   var carts = localStorage.getItem("cart", JSON.stringify(cart));
+  //   var cart_details = JSON.parse(carts);
+  //   console.log(cart_details);
+  // }, [cart]);
   return (
     <div className={classes.whole_div}>
-      <Navbar />
       <div style={{ width: "60%", padding: "0px 390px" }}>
         <div>
           <div>
@@ -95,7 +113,7 @@ function ProductDetails(props) {
                 <Grid item xs={6}>
                   <div>
                     <img
-                      src={loc_data.prod_img}
+                      src={loc_data.image}
                       alt="headphones"
                       className={classes.prod_img_div}
                     />
@@ -110,9 +128,7 @@ function ProductDetails(props) {
                       >
                         {loc_data.stock}
                       </span>
-                      <p className={classes.prod_det_name}>
-                        {loc_data.prod_name}
-                      </p>
+                      <p className={classes.prod_det_name}>{loc_data.name}</p>
                     </div>
                     <div className={classes.star_review_div}>
                       <div className={classes.star_flex_div}>
@@ -162,7 +178,7 @@ function ProductDetails(props) {
                           className={classes.prod_det_actual_price}
                           style={{ fontWeight: 700 }}
                         >
-                          ${loc_data.prod_price}.0
+                          ${loc_data.price}.0
                         </span>
                       </div>
                     </div>
@@ -302,6 +318,7 @@ function ProductDetails(props) {
                                   border: "1px solid transparent",
                                   color: "white",
                                 }}
+                                // onClick={() => dispatch(IncreaseQuantity(key))}
                               >
                                 +
                               </Button>
@@ -321,6 +338,7 @@ function ProductDetails(props) {
                                   border: "1px solid transparent",
                                   color: "white",
                                 }}
+                                // onClick={() => dispatch(DecreaseQuantity(key))}
                               >
                                 -
                               </Button>
@@ -351,13 +369,7 @@ function ProductDetails(props) {
                               color: "rgb(33, 43, 54)",
                               fontSize: "0.9375rem",
                             }}
-                            onClick={(e) => {
-                              dispatch({
-                                type: "ADD",
-                                payload: loc_data,
-                              });
-                              addcart(loc_data, e);
-                            }}
+                            onClick={() => dispatch(AddCart(loc_data))}
                           >
                             <svg
                               class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
@@ -571,7 +583,7 @@ const useStyles = makeStyles({
     backgroundColor: "#1A2138 !important",
   },
   product_details_heading: {
-    margin: " 30px 0px 8px !important",
+    padding: " 30px 0px 8px !important",
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: "2rem !important",
@@ -948,3 +960,49 @@ const useStyles = makeStyles({
   //   marginBottom: 30,
   // },
 });
+
+// **************************************************************************
+
+// import React, { Component, useEffect } from "react";
+// import { actFetchProductsRequest, AddCart } from "../Redux/actions";
+// import { connect, useDispatch, useSelector } from "react-redux";
+
+// export default function Product() {
+//   const items = useSelector((state) => state._todoProduct);
+//   const dispatch = useDispatch();
+//   console.log(items);
+
+//   // useEffect(()=> {
+//   //   dispatch(actFetchProductsRequest())
+//   // },[])
+//   return (
+//     <div className="row" style={{ marginTop: "10px" }}>
+//       <div className="col-md-12">
+//         <div className="row">
+//           {items._products.map((item, index) => (
+//             <div
+//               key={index}
+//               className="col-md-2"
+//               style={{ marginBottom: "10px" }}
+//             >
+//               <img
+//                 src={item.image}
+//                 className="img-resposive"
+//                 style={{ width: "100%", height: "100px" }}
+//               />
+//               <h5>{item.name}</h5>
+//               <span
+//                 className="badge badge-primary"
+//                 style={{ cursor: "pointer" }}
+//                 // onClick={() => dispatch(IncreaseQuantity(key))}
+//                 onClick={() => dispatch(AddCart(item))}
+//               >
+//                 Add Cart
+//               </span>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }

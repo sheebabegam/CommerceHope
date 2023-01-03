@@ -13,10 +13,12 @@ import ProductGridView from "./User_page/Pages/ProductGridView";
 import All_data from "./User_page/assets/JSON_data/All_data.json";
 import RegisterNoReuse from "./User_page/Pages/RegisterNoReuse";
 import Checkout from "./User_page/Pages/Checkout";
+import Navbar from "./User_page/Layouts/Navbar";
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Routes>
         <Route path="/" element={<Route_page />} />
         <Route

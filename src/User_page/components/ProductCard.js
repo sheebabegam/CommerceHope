@@ -14,15 +14,8 @@ import { useLocation } from "react-router-dom";
 function Prod_Card(props) {
   const classes = useStyles();
 
-  const {
-    prod_img,
-    stock,
-    prod_name,
-    prod_star,
-    prod_strike_price,
-    prod_price,
-    onClick,
-  } = props.card;
+  const { image, stock, name, prod_star, prod_strike_price, price, onClick } =
+    props.card;
   // console.log(props.onClick);
   return (
     <>
@@ -34,7 +27,7 @@ function Prod_Card(props) {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={prod_img}
+              image={image}
               // style={{ width: 350 }}
             />
             <div className={classes.sale_tag_div}>
@@ -45,10 +38,10 @@ function Prod_Card(props) {
                 gutterBottom
                 variant="h5"
                 component="h2"
-                className={classes.prod_name}
+                className={classes.name}
                 style={{ fontWeight: 600 }}
               >
-                {prod_name}
+                {name}
               </Typography>
               <div className={classes.star_div}>
                 <p className={classes.star_rate}>
@@ -66,7 +59,7 @@ function Prod_Card(props) {
                 <div>&nbsp;</div>
                 <div className={classes.prices}>
                   <p className={classes.strike_price}>${prod_strike_price}.0</p>
-                  <p className={classes.actual_price}>${prod_price}.0</p>
+                  <p className={classes.actual_price}>${price}.0</p>
                 </div>
               </div>
             </CardContent>
@@ -127,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between !important",
     marginTop: "-12px !important",
   },
-  prod_name: {
+  name: {
     color: "white !important",
     marginTop: -"36px !important",
     textOverflow: "ellipsis !important",
