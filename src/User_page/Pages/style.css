@@ -1,3 +1,40 @@
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 8.5px 14px !important;
 }
+
+span.MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel.css-1hv8oq8-MuiStepLabel-label {
+  color: white;
+}
+
+span.MuiStepLabel-label.Mui-disabled.MuiStepLabel-alternativeLabel.css-1hv8oq8-MuiStepLabel-label {
+  color: white;
+}
+
+span.MuiStepConnector-line.MuiStepConnector-lineHorizontal.css-z7uhs0-MuiStepConnector-line {
+  background-color: rgb(33, 43, 54);
+}
+
+.css-1mr67r1 {
+  background-color: rgb(69, 79, 91) !important;
+}
+
+table.makeStyles-subtotal_div-35 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+
+table.makeStyles-subtotal_div-185 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+
+#table_checkout {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}

@@ -78,11 +78,11 @@ function Landing_Page(props) {
       <Link
         to={{ pathname: "/commercehope/product-details" }}
         state={{ id: card }}
+        style={{ textDecoration: "none" }}
       >
         <ProductCard
           card={card}
           key={i}
-          style={{ textDecoration: "none" }}
           // onClick={() => {
           //   dispatch({ type: "ADD", payload: card });
           //   addcart(card);
@@ -97,6 +97,7 @@ function Landing_Page(props) {
       <Link
         to={{ pathname: "/commercehope/product-details" }}
         state={{ id: card }}
+        style={{ textDecoration: "none" }}
       >
         <ProductCard card={card} key={i} />
       </Link>

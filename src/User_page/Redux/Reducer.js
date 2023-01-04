@@ -80,6 +80,8 @@ const initProduct = {
   _products: ProductData,
 };
 
+localStorage.setItem("reducer_cart", JSON.stringify(initProduct));
+
 function todoProduct(state = initProduct, action) {
   // console.log(Carts)
   switch (action.type) {
@@ -148,9 +150,10 @@ function todoProduct(state = initProduct, action) {
         ...state,
         numberCart: state.numberCart - quantity_,
         Carts: state.Carts.filter((item) => {
-          return item.id !== state.Carts[action.payload].id;
+          return item.id != state.Carts[action.payload].id;
         }),
       };
+
     default:
       return state;
   }

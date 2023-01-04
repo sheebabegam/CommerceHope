@@ -390,6 +390,7 @@ function ProductDetails(props) {
                           <Link
                             to={{ pathname: "/commercehope/product-checkout" }}
                             state={{ id: loc_data }}
+                            style={{ textDecoration: "none" }}
                           >
                             <ProductAddToCart
                               style={{

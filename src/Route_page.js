@@ -8,12 +8,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Live_Preview_cards from "./User_page/assets/JSON_data/Live_Preview_cards.json";
 import { Link } from "react-router-dom";
+import Navbar from "./User_page/Layouts/Navbar";
 
 function Route_page() {
   const classes = useStyles();
   return (
     <div className={classes.apps}>
-      <Container maxWidth="false" className={classes.envato_div}>
+      {/* <Container maxWidth="false" className={classes.envato_div}>
         <div className={classes.logo_img} style={{ marginTop: "10px" }}>
           <img
             src="https://public-assets.envato-static.com/assets/logos/envato_market-a5ace93f8482e885ae008eb481b9451d379599dfed24868e52b6b2d66f5cf633.svg"
@@ -27,9 +28,9 @@ function Route_page() {
             Buy Now
           </Button>
         </div>
-      </Container>
+      </Container> */}
 
-      <Container maxWidth="false" className={classes.navbar_div}>
+      {/* <Container maxWidth="false" className={classes.navbar_div}>
         <div className={classes.commercehope_logo_div}>
           <div>
             <svg
@@ -77,7 +78,8 @@ function Route_page() {
             Documentation
           </Button>
         </div>
-      </Container>
+      </Container> */}
+      {/* <Navbar /> */}
 
       <Container>
         <Typography
@@ -149,7 +151,7 @@ function Route_page() {
               className={classes.view_btn_div}
             >
               <div>
-                <Link to={data.link}>
+                <Link to={data.link} style={{ textDecoration: "none" }}>
                   <Button variant="contained" className={classes.view_btn}>
                     View Demo
                   </Button>
@@ -237,7 +239,7 @@ const useStyles = makeStyles({
     fontWeight: "700px !important",
     lineHeight: 1.3333333333333333,
     color: "#fff !important",
-    marginTop: "32px !important",
+    paddingTop: "32px !important",
     marginBottom: "32px !important",
     textAlign: "center !important",
     fontFamily: "Montserrat !important",
