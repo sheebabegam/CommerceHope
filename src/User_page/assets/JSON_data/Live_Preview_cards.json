@@ -9,6 +9,6 @@
     "img": "https://app.commercehope.com/_next/image?url=%2Fimages%2Fdashboard-commercehope.png&w=1920&q=75",
     "card_header": "Admin Dashboard",
     "para_txt": "The Admin Dashboard is Designed for the admin to manage products and sales.",
-    "link": "/"
+    "link": "/admin-dashboard-login"
   }
 ]
