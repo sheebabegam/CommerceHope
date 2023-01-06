@@ -106,6 +106,7 @@ import OrdersIcon from "./Dashboard_Page/assets/Icons/OrdersIcon";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import BarGraph from "./Dashboard_Page/Pages/BarGraph";
+import Donutchart from "./Dashboard_Page/Pages/Donutchart";
 
 const drawerWidth = 240;
 
@@ -733,10 +734,9 @@ l-90 0 0 50 0 50 80 0 c73 0 80 2 80 20 0 18 -7 20 -80 20 l-80 0 0 45 0 44
               xs={4}
               style={{
                 maxWidth: "23%",
-                backgroundColor: "pink",
               }}
             >
-              jhgukgu
+              <Donutchart />
             </Grid>
           </Grid>
         </Box>
@@ -902,3 +902,5 @@ const useStyles = makeStyles({
     display: "block !important",
   },
 });
+
+// **********************************************************************

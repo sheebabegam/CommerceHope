@@ -1,71 +1,58 @@
-import React from "react";
-import { Bar } from "react-chartjs-2";
-import Chart from "chart.js/auto";
-
-// import "./styles.css";
+import { Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import Chart from "react-apexcharts";
+import "./style.css";
+import { makeStyles } from "@material-ui/styles";
 
 function BarGraph() {
-  const data = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    datasets: [
-      {
-        label: "First set",
-        data: [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 115],
-        backgroundColor: "blue",
-      },
-    ],
-  };
-
-  const options = {
-    responsive: false,
-    scales: {
-      xAxes: [
-        {
-          gridLines: {
-            display: true,
-            drawBorder: true,
-            borderDash: [4, 4],
-            zeroLineColor: "blue",
-          },
-          categoryPercentage: 0.7,
-          barPercentage: 0.9,
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-      yAxes: [
-        {
-          display: false,
-          gridLines: {
-            display: false,
-            zeroLineColor: "transparent",
-          },
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
+  const classes = useStyles();
   return (
-    <div style={{}}>
-      <Bar width="200" height="200" data={data} options={options} />
+    <div className="container-fluid mt-3 mb-3 ">
+      <Typography
+        variant="h6"
+        className={classes.sales_report}
+        style={{ fontWeight: 700 }}
+      >
+        Order Report
+      </Typography>
+      <Chart
+        type="donubart"
+        width={700}
+        height={400}
+        series={[
+          { name: "Company1", data: [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 115] },
+        ]}
+        options={{
+          // labels: [
+          //   "Jan",
+          //   "Feb",
+          //   "Mar",
+          //   "Apr",
+          //   "May",
+          //   "Jun",
+          //   "Jul",
+          //   "Aug",
+          //   "Sep",
+          //   "Oct",
+          //   "Nov",
+          //   "Dec",
+          // ],
+
+          colors: ["blue"],
+        }}
+      />
     </div>
   );
 }
-
 export default BarGraph;
+
+const useStyles = makeStyles({
+  sales_report: {
+    margin: "0px !important",
+    fontWeight: 700,
+    lineHeight: 1.55556,
+    fontSize: "1.125rem !important",
+    fontFamily: "Montserrat !important",
+    display: "block !important",
+  },
+});

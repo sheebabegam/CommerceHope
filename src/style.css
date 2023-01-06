@@ -1,0 +1,24 @@
+/* .apexcharts-theme-light {
+  height: 1000px !important;
+} */
+/* foreignObject {
+  height: 1000px !important;
+} */
+
+.apexcharts-legend.apexcharts-align-center.apx-legend-position-right {
+  position: absolute !important;
+  left: 50px !important;
+  top: 321px !important;
+  right: 5px !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  width: 297px !important;
+  align-items: center !important;
+}
+
+.apexcharts-inner {
+  transform: translate(12px, -12px) !important;
+}
