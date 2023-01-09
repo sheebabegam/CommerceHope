@@ -2,3 +2,34 @@
   box-shadow: none !important;
   margin-bottom: 1px solid black !important;
 }
+
+.apexcharts-toolbar {
+  display: none !important;
+}
+
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-4.makeStyles-donutchart-37.css-gj1fbr-MuiGrid-root {
+  max-width: 28% !important;
+}
+
+/* .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-8.MuiGrid-grid-sm-3.MuiGrid-grid-md-5.makeStyles-barchart-16.css-xl5jcr-MuiGrid-root {
+  max-width: 70% !important;
+} */
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.css-mhc70k-MuiGrid-root {
+  margin-left: 262px !important;
+}
+
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-3.makeStyles-donutchart-17.css-1equabv-MuiGrid-root {
+  max-width: 33% !important;
+}
+
+/* .apexcharts-legend.apexcharts-align-center.apx-legend-position-right {
+  left: -32px !important;
+  right: 0 !important;
+  top: unset !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  width: 452px !important;
+  bottom: -6px !important;
+  justify-content: center !important;
+} */

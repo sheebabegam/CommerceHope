@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Layouts/Navbar";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -20,15 +20,87 @@ import All_data from "../assets/JSON_data/All_data.json";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import usePagination from "./Pagination";
+import { useLocation } from "react-router-dom";
 
 function ProductPage(props) {
   const classes = useStyles();
+  const location = useLocation();
+  console.log(location.state.categ);
+
+  const [checkMen, setCheckMen] = useState(
+    location.state.categ === "men" ? true : false
+  );
+
+  const [checkWomen, setCheckWomen] = useState(
+    location.state.categ === "women" ? true : false
+  );
+
+  const [checkKid, setCheckKid] = useState(
+    location.state.categ === "kid" ? true : false
+  );
+
+  console.log("Men", checkMen);
+  console.log("Women", checkWomen);
+  console.log("Kid", checkKid);
+
   const [age, setAge] = React.useState("");
+
+  const data = props.All_data;
+
+  useEffect(() => {
+    setRows(data);
+  }, []);
+
+  const [rows, setRows] = React.useState([]);
+
+  const handleMenChecked = (e) => {
+    if (e.target.checked) {
+      const rows = props.All_data.filter((row) => row.category === "men");
+      setRows(rows);
+      // console.log(rows)
+    } else {
+      const rows = props.All_data.filter((row) => row.all === "all");
+      setRows(rows);
+    }
+  };
+
+  const handleWomenChecked = (e) => {
+    if (e.target.checked) {
+      const rows = props.All_data.filter((row) => row.category === "women");
+      setRows(rows);
+      // console.log(rows)
+    } else {
+      const rows = props.All_data.filter((row) => row.all === "all");
+      setRows(rows);
+    }
+  };
+
+  const handleKidChecked = (e) => {
+    if (e.target.checked) {
+      const rows = props.All_data.filter((row) => row.category === "kid");
+      setRows(rows);
+      // console.log(rows)
+    } else {
+      const rows = props.All_data.filter((row) => row.all === "all");
+      setRows(rows);
+    }
+  };
+
+  const handleOtherChecked = (e) => {
+    if (e.target.checked) {
+      const rows = props.All_data.filter((row) => row.category === "other");
+      setRows(rows);
+      // console.log(rows)
+    } else {
+      const rows = props.All_data.filter((row) => row.all === "all");
+      setRows(rows);
+    }
+  };
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  // console.log(props);
+  // console.log("Task", props.All_data);
 
   // const maps = All_data.find((data) => {
   //   return data.category == "women";
@@ -41,10 +113,13 @@ function ProductPage(props) {
   let [page, setPage] = useState(1);
   const PER_PAGE = 8;
 
-  const count = Math.ceil(props.All_data.length / PER_PAGE);
-  const selectedUsers = usePagination(props.All_data, PER_PAGE);
+  // console.log("Taskkkk...", )
 
-  console.log("Selected USERS", selectedUsers);
+  const count = Math.ceil(rows.length / PER_PAGE);
+  // const selectedUsers = usePagination(props.All_data, PER_PAGE);
+  const selectedUsers = usePagination(rows, PER_PAGE);
+
+  // console.log("Selected USERS", selectedUsers);
 
   const handleChange1 = (e, p) => {
     setPage(p);
@@ -59,9 +134,13 @@ function ProductPage(props) {
     return <ProductCardList card={card} key={i} />;
   });
 
+  // let menFilter = props.All_data.map((row, i) => (
+  //   console.log(row.name)
+  // ))
+
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className={classes.whole_div} style={{ padding: "18px 200px" }}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
@@ -80,13 +159,27 @@ function ProductPage(props) {
                   <div className={classes.padding_list_prod_page_div}>
                     <div className={classes.gen_res_flex_div}>
                       <p className={classes.gender}>Gender</p>
-                      <Button>Reset</Button>
+                      <Button type="reset" onClick={() => setRows(data)}>
+                        Reset
+                      </Button>
                     </div>
                     <div>
-                      <ProductCheckBox label="Men"></ProductCheckBox>
-                      <ProductCheckBox label="Women"></ProductCheckBox>
-                      <ProductCheckBox label="Kids"></ProductCheckBox>
-                      <ProductCheckBox label="Others"></ProductCheckBox>
+                      <ProductCheckBox
+                        label="Men"
+                        onChange={handleMenChecked}
+                      ></ProductCheckBox>
+                      <ProductCheckBox
+                        label="Women"
+                        onChange={handleWomenChecked}
+                      ></ProductCheckBox>
+                      <ProductCheckBox
+                        label="Kids"
+                        onChange={handleKidChecked}
+                      ></ProductCheckBox>
+                      <ProductCheckBox
+                        label="Others"
+                        onChange={handleOtherChecked}
+                      ></ProductCheckBox>
                     </div>
                   </div>
 
@@ -267,46 +360,14 @@ function ProductPage(props) {
                       {Grid_prod}
                     </Grid>
                   )}
-
                   {view === "list" && <div>{List_prod}</div>}
+
+                  {/* {rows.map((item, i) => (
+                    <p>{item.name}</p>
+                  ))} */}
                 </div>
               </div>
-              {/* <div>
-                <div className={classes.pagination_flex_div}>
-                  <Button onClick={getPrevious}>
-                    <svg
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-k2nkbn"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="NavigateBeforeIcon"
-                      height={22}
-                      width={22}
-                      fill="white"
-                    >
-                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                    </svg>
-                  </Button>
-                  <Button>1</Button>
-                  <Button>2</Button>
-                  <Button>3</Button>
-                  <Button>4</Button>
-                  <Button onClick={getNext}>
-                    <svg
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-k2nkbn"
-                      focusable="false"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-testid="NavigateNextIcon"
-                      height={22}
-                      width={22}
-                      fill="white"
-                    >
-                      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                    </svg>
-                  </Button>
-                </div>
-              </div> */}
+
               <div className={classes.pagination_flex_div}>
                 <Stack spacing={2} style={{ color: "white" }}>
                   <Pagination

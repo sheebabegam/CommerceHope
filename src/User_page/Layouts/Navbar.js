@@ -48,7 +48,7 @@ const Navbar = () => {
 
   const filtered = All_data.filter((data) => {
     const searchTerm = value.toLowerCase();
-    const Name = data.prod_name.toLowerCase();
+    const Name = data.name.toLowerCase();
 
     return searchTerm && Name.startsWith(searchTerm) && Name !== searchTerm;
   });
@@ -135,6 +135,7 @@ const Navbar = () => {
               </div>
               <Link
                 to="/commercehope/product-page"
+                state={{ categ: "men" }}
                 sx={{
                   textDecoration: "none",
                   backgroundColor: "#6439ff",
@@ -144,7 +145,8 @@ const Navbar = () => {
                 <Button className={classes.nav_btn_css}>Men</Button>
               </Link>
               <Link
-                to="/commercehope/product-list-view"
+                to="/commercehope/product-page"
+                state={{ categ: "women" }}
                 sx={{
                   textDecoration: "none",
                   backgroundColor: "#6439ff",
@@ -154,7 +156,8 @@ const Navbar = () => {
                 <Button className={classes.nav_btn_css}>Women</Button>
               </Link>
               <Link
-                to="/commercehope"
+                to="/commercehope/product-page"
+                state={{ categ: "kid" }}
                 sx={{
                   textDecoration: "none",
                   backgroundColor: "#6439ff",

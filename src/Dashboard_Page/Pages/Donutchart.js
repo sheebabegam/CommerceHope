@@ -20,7 +20,7 @@ function Donutchart() {
         type="donut"
         width={400}
         height={400}
-        style={{ padding: "30px 50px" }}
+        style={{ padding: "30px 159px" }}
         series={[70, 12, 14, 1, 3]}
         options={{
           labels: [

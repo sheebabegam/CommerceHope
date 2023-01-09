@@ -109,6 +109,7 @@ function Checkout(props) {
 
   return (
     <div className={classes.whole_div}>
+      <Navbar />
       <div>
         <div style={{ width: "60%", padding: "0px 390px" }}>
           <div>

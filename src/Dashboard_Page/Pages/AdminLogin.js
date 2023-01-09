@@ -57,7 +57,7 @@ function AdminLogin() {
           console.log("You Are Successfully Logged In");
           console.log("LogAPIData is", LogAPIData[i]);
           localStorage.setItem("userdata", JSON.stringify(LogAPIData[i]));
-          navigate("/");
+          navigate("/admin-dashboard");
         } else {
           console.log("Incorrect password");
         }

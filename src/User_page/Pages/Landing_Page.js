@@ -109,7 +109,7 @@ function Landing_Page(props) {
 
   return (
     <div className={classes.whole_div}>
-      {/* <Navbar /> */}
+      <Navbar />
       <div>
         <Carousel>
           {items.map((item, i) => (

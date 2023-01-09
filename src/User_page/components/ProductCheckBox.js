@@ -6,13 +6,14 @@ import Checkbox from "@mui/material/Checkbox";
 
 function ProductCheckBox(props) {
   const classes = useStyles();
-  const { label } = props;
+  const { label, onChange } = props;
   return (
     <FormGroup>
       <FormControlLabel
         control={<Checkbox style={{ color: "grey" }} />}
         label={label}
         className={classes.check_box}
+        onChange={onChange}
       />
     </FormGroup>
   );
