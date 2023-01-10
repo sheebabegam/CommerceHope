@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import SpeedIcon from "@mui/icons-material/Speed";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import { makeStyles } from "@material-ui/styles";
-import "./style.css";
+import "../style.css";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import StoreIcon from "@mui/icons-material/Store";

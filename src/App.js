@@ -14,15 +14,16 @@ import All_data from "./User_page/assets/JSON_data/All_data.json";
 import RegisterNoReuse from "./User_page/Pages/RegisterNoReuse";
 import Checkout from "./User_page/Pages/Checkout";
 import Navbar from "./User_page/Layouts/Navbar";
-import AdminLogin from "./Dashboard_Page/Pages/AdminLogin";
-import AdminRegister from "./Dashboard_Page/Pages/AdminRegister";
-import DashBoard from "./Dashboard_Page/Pages/DashBoard";
-import Categories from "./Dashboard_Page/Pages/Categories";
-import Products from "./Dashboard_Page/Pages/Products";
-import Orders from "./Dashboard_Page/Pages/Orders";
-import Users from "./Dashboard_Page/Pages/Users";
-import Newsletter from "./Dashboard_Page/Pages/Newsletter";
-import Settings from "./Dashboard_Page/Pages/Settings";
+import AdminLogin from "./Dashboard_Page/Pages/Admin/AdminLogin";
+import AdminRegister from "./Dashboard_Page/Pages/Admin/AdminRegister";
+import DashBoard from "./Dashboard_Page/Pages/Dashboard/DashBoard";
+import Categories from "./Dashboard_Page/Pages/Categories/Categories";
+import Products from "./Dashboard_Page/Pages/Products/Products";
+import Orders from "./Dashboard_Page/Pages/Orders/Orders";
+import Users from "./Dashboard_Page/Pages/Users/Users";
+import Newsletter from "./Dashboard_Page/Pages/Newsletter/Newsletter";
+import Settings from "./Dashboard_Page/Pages/Settings/Settings";
+import Edit_Categories from "./Dashboard_Page/Pages/Categories/Edit_Categories";
 
 function App() {
   return (
@@ -73,6 +74,7 @@ function App() {
         <Route path="/admin-users" element={<Users />} />
         <Route path="/admin-newsletter" element={<Newsletter />} />
         <Route path="/admin-settings" element={<Settings />} />
+        <Route path="/admin-edit-categories" element={<Edit_Categories />} />
       </Routes>
     </div>
   );

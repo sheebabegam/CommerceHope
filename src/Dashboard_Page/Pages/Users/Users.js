@@ -1,17 +1,17 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import "./style.css";
+import "../style.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import AdminDashboard from "./AdminDashboard";
+import AdminDashboard from "../DashboardLayout/AdminDashboard";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 
 const drawerWidth = 240;
-function Orders(props) {
+function Users(props) {
   const classes = useStyles();
 
   return (
@@ -56,11 +56,11 @@ function Orders(props) {
             }}
           >
             <tr>
-              <th style={{ color: "white", paddingLeft: 30 }}>Product</th>
-              <th>Created at</th>
+              <th style={{ color: "white", paddingLeft: 30 }}>User</th>
+              <th>Email</th>
+              <th>Phone</th>
               <th>Status</th>
-              <th>Price</th>
-              <th>Quantity</th>
+              <th>Joined</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -78,7 +78,7 @@ function Orders(props) {
                 >
                   <div>
                     <img
-                      src="https://res.cloudinary.com/techgater/image/upload/v1669281850/my-uploads/jweav3dmxwvdujovj3ms.jpg"
+                      // src="https://res.cloudinary.com/techgater/image/upload/v1673092777/my-uploads/qdt3yhamfsxyhybbwbjz.jpg"
                       alt=""
                       style={{
                         height: 64,
@@ -101,37 +101,58 @@ function Orders(props) {
               </td>
               <td>
                 <Typography variant="h6" className={classes.map_text_color}>
-                  09 Jan 2023 10:45
+                  Sports
                 </Typography>
               </td>
               <td>
                 <Typography variant="h6" className={classes.map_text_color}>
-                  pending
+                  0
                 </Typography>
               </td>
               <td>
                 <Typography variant="h6" className={classes.map_text_color}>
-                  $100.0
+                  07 Jan 2023
                 </Typography>
               </td>
-              <td>
-                <Typography variant="h6" className={classes.map_text_color}>
-                  1
-                </Typography>
-              </td>
-              <td>
+
+              <td style={{ width: 150 }}>
                 <Button>
                   <svg
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-10dohqv"
-                    focusable="false"
+                    xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
+                    role="img"
+                    width="24"
+                    height="24"
+                    preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 24 24"
-                    data-testid="RemoveRedEyeIcon"
                     fill="rgb(99, 115, 129)"
-                    height={25}
-                    width={25}
                   >
-                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path>
+                    <path
+                      fill="rgb(99, 115, 129)"
+                      d="M19.4 7.34L16.66 4.6A2 2 0 0 0 14 4.53l-9 9a2 2 0 0 0-.57 1.21L4 18.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 20h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71ZM16 10.68L13.32 8l1.95-2L18 8.73Z"
+                    ></path>
+                  </svg>
+                </Button>
+
+                <Button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    width="24"
+                    height="24"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                    fill="rgb(99, 115, 129)"
+                  >
+                    <path
+                      fill="rgb(99, 115, 129)"
+                      d="M21 6h-5V4.33A2.42 2.42 0 0 0 13.5 2h-3A2.42 2.42 0 0 0 8 4.33V6H3a1 1 0 0 0 0 2h1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8h1a1 1 0 0 0 0-2ZM10 4.33c0-.16.21-.33.5-.33h3c.29 0 .5.17.5.33V6h-4ZM18 19a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V8h12Z"
+                    ></path>
+                    <path
+                      fill="rgb(99, 115, 129)"
+                      d="M9 17a1 1 0 0 0 1-1v-4a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1Zm6 0a1 1 0 0 0 1-1v-4a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1Z"
+                    ></path>
                   </svg>
                 </Button>
               </td>
@@ -144,11 +165,11 @@ function Orders(props) {
   );
 }
 
-Orders.propTypes = {
+Users.propTypes = {
   window: PropTypes.func,
 };
 
-export default Orders;
+export default Users;
 
 const useStyles = makeStyles({
   breadcrumb: {

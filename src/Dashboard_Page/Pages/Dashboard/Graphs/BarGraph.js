@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import "./style.css";
+import "../../style.css";
 import { makeStyles } from "@material-ui/styles";
 
 function BarGraph() {

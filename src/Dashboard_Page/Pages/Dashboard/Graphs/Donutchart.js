@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import "./style.css";
+import "../../style.css";
 import { makeStyles } from "@material-ui/styles";
 
 function Donutchart() {
@@ -20,7 +20,7 @@ function Donutchart() {
         type="donut"
         width={400}
         height={400}
-        style={{ padding: "30px 159px" }}
+        style={{ padding: "30px 127px" }}
         series={[70, 12, 14, 1, 3]}
         options={{
           labels: [

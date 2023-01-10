@@ -1,18 +1,24 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import "./style.css";
+import "../style.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import AdminDashboard from "./AdminDashboard";
+import AdminDashboard from "../DashboardLayout/AdminDashboard";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
-function Users(props) {
+function Categories(props) {
   const classes = useStyles();
+
+  const location = useLocation();
+
+  console.log(location.state.items);
 
   return (
     <div>
@@ -34,6 +40,7 @@ function Users(props) {
           <Divider sx={{ marginLeft: "-36px", marginRight: "-267px" }} />
         </Box>
       </div>
+
       <div>
         <table
           style={{
@@ -56,11 +63,10 @@ function Users(props) {
             }}
           >
             <tr>
-              <th style={{ color: "white", paddingLeft: 30 }}>User</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Status</th>
-              <th>Joined</th>
+              <th style={{ color: "white", paddingLeft: 30 }}>Category</th>
+              <th>Parent Category</th>
+              <th>Total Item</th>
+              <th>Created at</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -78,7 +84,7 @@ function Users(props) {
                 >
                   <div>
                     <img
-                      // src="https://res.cloudinary.com/techgater/image/upload/v1673092777/my-uploads/qdt3yhamfsxyhybbwbjz.jpg"
+                      src="https://res.cloudinary.com/techgater/image/upload/v1673092777/my-uploads/qdt3yhamfsxyhybbwbjz.jpg"
                       alt=""
                       style={{
                         height: 64,
@@ -116,23 +122,25 @@ function Users(props) {
               </td>
 
               <td style={{ width: 150 }}>
-                <Button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                    fill="rgb(99, 115, 129)"
-                  >
-                    <path
+                <Link to="/admin-edit-categories">
+                  <Button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="img"
+                      width="24"
+                      height="24"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
                       fill="rgb(99, 115, 129)"
-                      d="M19.4 7.34L16.66 4.6A2 2 0 0 0 14 4.53l-9 9a2 2 0 0 0-.57 1.21L4 18.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 20h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71ZM16 10.68L13.32 8l1.95-2L18 8.73Z"
-                    ></path>
-                  </svg>
-                </Button>
+                    >
+                      <path
+                        fill="rgb(99, 115, 129)"
+                        d="M19.4 7.34L16.66 4.6A2 2 0 0 0 14 4.53l-9 9a2 2 0 0 0-.57 1.21L4 18.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 20h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71ZM16 10.68L13.32 8l1.95-2L18 8.73Z"
+                      ></path>
+                    </svg>
+                  </Button>
+                </Link>
 
                 <Button>
                   <svg
@@ -165,11 +173,11 @@ function Users(props) {
   );
 }
 
-Users.propTypes = {
+Categories.propTypes = {
   window: PropTypes.func,
 };
 
-export default Users;
+export default Categories;
 
 const useStyles = makeStyles({
   breadcrumb: {

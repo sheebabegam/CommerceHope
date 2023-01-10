@@ -33,3 +33,13 @@
   bottom: -6px !important;
   justify-content: center !important;
 } */
+
+.makeStyles-textareas-8:hover {
+  /* border-color: pink !important; */
+}
+
+.makeStyles-textareas-8:focus-visible {
+  /* border-color: pink !important; */
+  outline: solid white !important;
+}
+/* rgba(145, 158, 171, 0.24) */

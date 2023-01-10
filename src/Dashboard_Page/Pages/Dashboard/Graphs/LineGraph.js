@@ -41,8 +41,9 @@ export default function LineGraph() {
         type="line"
         series={guestSeries}
         options={guestOption}
-        width="90%"
+        width="100%"
         height={400}
+        style={{ minWidth: "100%" }}
       />
     </div>
   );

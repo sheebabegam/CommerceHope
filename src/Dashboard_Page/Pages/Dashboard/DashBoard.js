@@ -1,21 +1,21 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import "./style.css";
-import EarningIcon from "../assets/Icons/EarningIcon";
-import UsersIcon from "../assets/Icons/UsersIcon";
-import ProductsIcon from "../assets/Icons/ProductsIcon";
-import OrdersIcon from "../assets/Icons/OrdersIcon";
+import "../style.css";
+import EarningIcon from "../../assets/Icons/EarningIcon";
+import UsersIcon from "../../assets/Icons/UsersIcon";
+import ProductsIcon from "../../assets/Icons/ProductsIcon";
+import OrdersIcon from "../../assets/Icons/OrdersIcon";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import BarGraph from "../Pages/BarGraph";
-import Donutchart from "../Pages/Donutchart";
-import LineGraph from "./LineGraph";
+import BarGraph from "./Graphs/BarGraph";
+import Donutchart from "./Graphs/Donutchart";
+import LineGraph from "./Graphs/LineGraph";
 import PropTypes from "prop-types";
-import AdminDashboard from "./AdminDashboard";
+import AdminDashboard from "../DashboardLayout/AdminDashboard";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 
@@ -119,6 +119,7 @@ function Dashboard(props) {
               style={{
                 marginRight: 30,
                 maxWidth: "48.5%",
+                minWidth: "55%",
                 height: 400,
               }}
               className={classes.barchart}
@@ -137,6 +138,7 @@ function Dashboard(props) {
               xs={3}
               style={{
                 maxWidth: "28%",
+                minWidth: "28%",
               }}
               className={classes.donutchart}
             >
