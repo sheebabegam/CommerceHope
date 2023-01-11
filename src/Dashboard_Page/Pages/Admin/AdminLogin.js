@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
+import FormWhiteContainer from "../../components/FormWhiteContainer";
 
 import axios from "axios";
 
@@ -68,18 +69,24 @@ function AdminLogin() {
   };
 
   return (
-    <div className={classes.color_main_div}>
+    <div className={classes.color_main_div1}>
       {/* <Navbar /> */}
 
       <div>
         <WelcomeText />
-        <FormContainer>
-          <FormMainHeading>Login</FormMainHeading>
-          <FormSubHeading>Login to your account to continue</FormSubHeading>
+        <FormWhiteContainer>
+          <FormMainHeading
+            style={{ color: "rgb(33, 43, 54)", fontWeight: 700, fontSize: 25 }}
+          >
+            Login
+          </FormMainHeading>
+          <FormSubHeading style={{ margin: "12px 0px 40px" }}>
+            Login to your account to continue
+          </FormSubHeading>
 
-          <form className={classes.form} onSubmit={handleSubmit(mySubmit)}>
+          <form className={classes.form1} onSubmit={handleSubmit(mySubmit)}>
             <CssTextField
-              className={classes.fields}
+              className={classes.fields1}
               variant="outlined"
               margin="normal"
               required
@@ -88,10 +95,10 @@ function AdminLogin() {
               label="Email"
               name="email"
               multiline
-              inputProps={{ style: { color: "white" } }}
+              inputProps={{ style: { color: "black" } }}
               InputLabelProps={{
                 style: {
-                  color: "white",
+                  color: "black",
                 },
               }}
               {...register("email", {
@@ -104,7 +111,7 @@ function AdminLogin() {
             />
 
             <CssTextField
-              className={classes.fields}
+              className={classes.fields1}
               variant="outlined"
               margin="normal"
               required
@@ -113,10 +120,10 @@ function AdminLogin() {
               label="Password"
               name="password"
               multiline
-              inputProps={{ style: { color: "white" } }}
+              inputProps={{ style: { color: "black" } }}
               InputLabelProps={{
                 style: {
-                  color: "white",
+                  color: "black",
                 },
               }}
               {...register("password", {
@@ -134,16 +141,20 @@ function AdminLogin() {
                 },
               })}
             />
-            <div className={classes.check_div}>
+            <div className={classes.check_div1}>
               <FormGroup>
                 <FormControlLabel
                   control={<Checkbox defaultChecked />}
                   label="Remember me"
-                />
+                  style={{ color: "rgb(33, 43, 54)" }}
+                >
+                  {" "}
+                  Remember me
+                </FormControlLabel>
               </FormGroup>
               <a
                 href="/commercehope/forget-password"
-                className={classes.forget_pass}
+                className={classes.forget_pass1}
               >
                 Forget Password
               </a>
@@ -154,9 +165,10 @@ function AdminLogin() {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.button}
+                className={classes.button1}
                 // onClick={loginSubmit}
                 data-toggle="modal"
+                style={{ backgroundColor: "rgb(0, 125, 252)" }}
               >
                 Login
               </Button>
@@ -179,7 +191,7 @@ function AdminLogin() {
               <TermsText></TermsText>
             </div>
           </form>
-        </FormContainer>
+        </FormWhiteContainer>
       </div>
     </div>
   );
@@ -188,10 +200,10 @@ function AdminLogin() {
 export default AdminLogin;
 
 const useStyles = makeStyles({
-  color_main_div: {
+  color_main_div1: {
     backgroundColor: "white !important",
   },
-  login_h4: {
+  login_h41: {
     margin: "0px 0px 16px",
     fontWeight: 700,
     lineHeight: 1.5,
@@ -200,8 +212,8 @@ const useStyles = makeStyles({
     textAlign: "center",
     color: "rgb(255, 255, 255)",
   },
-  login_p: {
-    margin: "0px 0px 40px",
+  login_p1: {
+    margin: "12px 0px 40px",
     lineHeight: 1.5,
     fontSize: "1rem",
     fontFamily: "Montserrat !important",
@@ -209,9 +221,9 @@ const useStyles = makeStyles({
     textAlign: "center",
     color: "rgb(145, 158, 171)",
   },
-  login_form_main_div: {
-    backgroundColor: "rgb(26, 33, 56)",
-    color: "rgb(255, 255, 255)",
+  login_form_main_div1: {
+    backgroundColor: "white !important",
+    color: "black !important",
     borderRadius: "4px",
     boxShadow: "none",
     backgroundImage: "none",
@@ -226,19 +238,19 @@ const useStyles = makeStyles({
     justifyContent: "center",
     padding: "24px",
   },
-  check_div: {
+  check_div1: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  forget_pass: {
+  forget_pass1: {
     textDecoration: "none",
     fontSize: "16px",
     fontWeight: 700,
     fontFamily: "Montserrat !important",
     color: "rgb(0, 125, 252)",
   },
-  get_started: {
+  get_started1: {
     textDecoration: "none",
     fontSize: "16px",
     fontWeight: 700,

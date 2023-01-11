@@ -23,7 +23,8 @@ import Orders from "./Dashboard_Page/Pages/Orders/Orders";
 import Users from "./Dashboard_Page/Pages/Users/Users";
 import Newsletter from "./Dashboard_Page/Pages/Newsletter/Newsletter";
 import Settings from "./Dashboard_Page/Pages/Settings/Settings";
-import Edit_Categories from "./Dashboard_Page/Pages/Categories/Edit_Categories";
+import Edit_Categories from "./Dashboard_Page/Pages/Categories/EditCategories";
+import AddCategories from "./Dashboard_Page/Pages/Categories/AddCategories";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         <Route path="/admin-newsletter" element={<Newsletter />} />
         <Route path="/admin-settings" element={<Settings />} />
         <Route path="/admin-edit-categories" element={<Edit_Categories />} />
+        <Route path="/admin-add-categories" element={<AddCategories />} />
       </Routes>
     </div>
   );

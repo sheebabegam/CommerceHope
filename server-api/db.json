@@ -56,5 +56,25 @@
       "email": "sheeba@gmail.com",
       "password": "Sheeba123*"
     }
+  ],
+  "adminCategory": [
+    {
+      "name": "Mobilejfhj",
+      "description": "Shirtjgbkb",
+      "type": "Sports",
+      "img": {
+        "postImage": ""
+      },
+      "id": "6758a1c8-7afb-4b67-80e9-7a4126507039"
+    },
+    {
+      "name": "Laptopgfngf",
+      "description": "Bagscgn",
+      "type": "Electronics",
+      "img": {
+        "postImage": ""
+      },
+      "id": "c3bb2bfd-8bb3-4547-aff0-60ad86d9c5b0"
+    }
   ]
 }

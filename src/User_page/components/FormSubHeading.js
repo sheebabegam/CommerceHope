@@ -4,8 +4,12 @@ import { Typography } from "@mui/material";
 
 function FormSubHeading(props) {
   const classes = useStyles();
-  const { children } = props;
-  return <p className={classes.login_p}>{children}</p>;
+  const { children, style } = props;
+  return (
+    <p className={classes.login_p} style={style}>
+      {children}
+    </p>
+  );
 }
 
 export default FormSubHeading;

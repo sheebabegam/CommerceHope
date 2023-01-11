@@ -18,38 +18,90 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import MonochromePhotosIcon from "@mui/icons-material/MonochromePhotos";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useForm } from "react-hook-form";
+import api from "../../../api/userInfo";
+import { v4 as uuidv4 } from "uuid";
 
 const drawerWidth = 240;
-function Edit_Categories(props) {
+function EditCategories(props) {
   const classes = useStyles();
   const [imageUpload, setImageUpload] = useState();
+  console.log("Image Upload", imageUpload);
 
   const location = useLocation();
 
-  const initialFormState = { id: null, name: "", username: "" };
-  const [user, setUser] = useState(
-    props.editing ? props.currentUser : initialFormState
-  );
+  console.log("Location Id", location.state.items);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    setUser({ ...user, [name]: value });
+  const [categoryInfo, setCategoryInfo] = useState([]);
+  const [postImage, setPostImage] = useState("");
+  const retriveContacts = async () => {
+    const response = await api.get("/adminCategory");
+    return response.data;
+  };
+  // const onSubmit = (data) => console.log(data);
+  const mySubmit = async (data) => {
+    console.log();
+
+    const request = {
+      ...data,
+      img: { postImage },
+      // name: "my name",
+      // description: "test",
+      // type: "yyyy",
+    };
+
+    const response = await api.put(
+      `/adminCategory/${location.state.items.id}`,
+      request
+    );
+    console.log(response);
+    setCategoryInfo([...categoryInfo, response.data]);
   };
 
   useEffect(() => {
-    setUser(props.currentUser);
-  }, [props]);
+    // const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    // if (retriveContacts) setCategoryInfo(retriveContacts);
 
-  const resetAddUser = () => {
-    props.setEditing(false);
-    setUser(initialFormState);
-    props.setCurrentUser(initialFormState);
+    const getContacts = async () => {
+      const allContacts = await retriveContacts();
+      if (allContacts) setCategoryInfo(allContacts);
+    };
+    getContacts();
+  }, []);
+
+  const handleImgSubmit = (e) => {
+    e.preventDefault();
+    // console.log(postImage);
   };
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+  const handleFilesUpload = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    setPostImage(base64);
+  };
+  console.log(postImage);
 
   return (
     <div>
-      <form>
+      <form onSubmit={mySubmit}>
         <AdminDashboard />
         <div className={classes.breadcrumb}>
           <Box
@@ -101,6 +153,7 @@ function Edit_Categories(props) {
                         fullWidth
                         id="name"
                         name="name"
+                        defaultValue={location.state.items.name}
                         multiline
                         inputProps={{ style: { color: "black" } }}
                         InputLabelProps={{
@@ -108,6 +161,9 @@ function Edit_Categories(props) {
                             border: "1px solid rgba(145, 158, 171, 0.24)",
                           },
                         }}
+                        {...register("name", {
+                          required: "Name is required",
+                        })}
                       />
                     </div>
                   </div>
@@ -126,9 +182,12 @@ function Edit_Categories(props) {
                     <div style={{ width: "98%" }}>
                       <TextareaAutosize
                         rows={30}
-                        // value={text}
+                        defaultValue={location.state.items.description}
                         // onChange={handleChange}
                         className={classes.textareas}
+                        {...register("description", {
+                          required: "Description is required",
+                        })}
                       />
                     </div>
                   </div>
@@ -160,19 +219,24 @@ function Edit_Categories(props) {
                       inputProps={{ style: { height: "70px !important" } }}
                     >
                       <Select
-                        //   value={age}
+                        {...register("type", {
+                          required: "Please select type",
+                        })}
+                        // value={location.state.items.type}
                         //   onChange={handleChange}
                         // displayEmpty
                         inputProps={{ style: { height: "70px" } }}
                         style={{ height: "55px" }}
                       >
-                        <MenuItem value={10}>Bags</MenuItem>
-                        <MenuItem value={20}>Shoes</MenuItem>
-                        <MenuItem value={30}>Shirts</MenuItem>
-                        <MenuItem value={30}>Makeup</MenuItem>
-                        <MenuItem value={30}>Sports</MenuItem>
-                        <MenuItem value={30}>Electronics</MenuItem>
-                        <MenuItem value={30}>Home Appliances</MenuItem>
+                        <MenuItem value="Bags">Bags</MenuItem>
+                        <MenuItem value="Shoes">Shoes</MenuItem>
+                        <MenuItem value="Shirts">Shirts</MenuItem>
+                        <MenuItem value="Makeup">Makeup</MenuItem>
+                        <MenuItem value="Sports">Sports</MenuItem>
+                        <MenuItem value="Electronics">Electronics</MenuItem>
+                        <MenuItem value="Home Appliances">
+                          Home Appliances
+                        </MenuItem>
                       </Select>
                     </FormControl>
                   </div>
@@ -192,12 +256,17 @@ function Edit_Categories(props) {
                       <div className="loaded_img_sec">
                         <img
                           name="photo"
+                          // src={
+                          //   imageUpload ? (
+                          //     URL.createObjectURL(imageUpload)
+                          //   ) : (
+                          //     <AccountCircleIcon />
+                          //   )
+                          // }
                           src={
-                            imageUpload ? (
-                              URL.createObjectURL(imageUpload)
-                            ) : (
-                              <AccountCircleIcon />
-                            )
+                            imageUpload === undefined
+                              ? location.state.items.img.postImage
+                              : imageUpload
                           }
                           alt={imageUpload ? imageUpload.name : null}
                           style={{ height: 227, width: "100%" }}
@@ -266,6 +335,7 @@ function Edit_Categories(props) {
                   variant="contained"
                   className={classes.edit_categ_btn}
                   style={{ fontWeight: 700 }}
+                  onClick={handleSubmit(mySubmit)}
                 >
                   Edit Category
                 </Button>
@@ -278,11 +348,11 @@ function Edit_Categories(props) {
   );
 }
 
-Edit_Categories.propTypes = {
+EditCategories.propTypes = {
   window: PropTypes.func,
 };
 
-export default Edit_Categories;
+export default EditCategories;
 
 const useStyles = makeStyles({
   breadcrumb: {

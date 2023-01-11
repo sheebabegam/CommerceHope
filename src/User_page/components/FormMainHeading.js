@@ -4,13 +4,9 @@ import { Typography } from "@mui/material";
 
 function FormMainHeading(props) {
   const classes = useStyles();
-  const { children } = props;
+  const { children, style } = props;
   return (
-    <Typography
-      variant="h4"
-      className={classes.login_h4}
-      style={{ fontWeight: 700 }}
-    >
+    <Typography variant="h4" className={classes.login_h4} style={style}>
       {children}
     </Typography>
   );
@@ -20,7 +16,7 @@ export default FormMainHeading;
 
 const useStyles = makeStyles({
   login_h4: {
-    margin: "0px 0px 16px",
+    margin: "12px 0px 16px",
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: "1.25rem",

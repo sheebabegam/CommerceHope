@@ -14,7 +14,7 @@ function Route_page() {
   const classes = useStyles();
   return (
     <div className={classes.apps}>
-      {/* <Container maxWidth="false" className={classes.envato_div}>
+      <Container maxWidth="false" className={classes.envato_div}>
         <div className={classes.logo_img} style={{ marginTop: "10px" }}>
           <img
             src="https://public-assets.envato-static.com/assets/logos/envato_market-a5ace93f8482e885ae008eb481b9451d379599dfed24868e52b6b2d66f5cf633.svg"
@@ -28,9 +28,9 @@ function Route_page() {
             Buy Now
           </Button>
         </div>
-      </Container> */}
+      </Container>
 
-      {/* <Container maxWidth="false" className={classes.navbar_div}>
+      <Container maxWidth="false" className={classes.navbar_div}>
         <div className={classes.commercehope_logo_div}>
           <div>
             <svg
@@ -78,7 +78,7 @@ function Route_page() {
             Documentation
           </Button>
         </div>
-      </Container> */}
+      </Container>
       {/* <Navbar /> */}
 
       <Container>
@@ -92,82 +92,91 @@ function Route_page() {
       </Container>
 
       <div
-        className={classes.map_div}
         style={{
           display: "flex",
           justifyContent: "center !important",
           alignItems: "center !important",
           width: "100%",
-          margin: "0px 225px",
         }}
       >
-        {Live_Preview_cards.map((data, i) => (
-          <Card
-            className={classes.card_contain}
-            style={{
-              width: "70% !important",
-              marginRight: "20px",
-              // padding: "0px 100px !important",
-            }}
-          >
-            <div
-              className={classes.card_img_div}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "70% !important",
-                height: "100% !important",
-              }}
-            >
-              <CardMedia
-                component="img"
-                alt="card_img"
-                height="140"
-                image={data.img}
-                className={classes.card_img}
-              />
-            </div>
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                className={classes.card_content}
-                style={{ fontWeight: 700 }}
+        <div
+          className={classes.map_div}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          {Live_Preview_cards.map((data, i) => (
+            <div>
+              <Card
+                className={classes.card_contain}
+                style={{
+                  width: "70% !important",
+                  marginRight: "20px",
+                }}
               >
-                {data.card_header}
-              </Typography>
-              <p className={classes.para_card} style={{ width: "670px" }}>
-                {data.para_txt}
-              </p>
-            </CardContent>
-            <CardActions
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              className={classes.view_btn_div}
-            >
-              <div>
-                <Link to={data.link} style={{ textDecoration: "none" }}>
-                  <Button variant="contained" className={classes.view_btn}>
-                    View Demo
-                  </Button>
-                </Link>
-              </div>
-            </CardActions>
-          </Card>
-        ))}
+                <div
+                  className={classes.card_img_div}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "70% !important",
+                    height: "100% !important",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    alt="card_img"
+                    height="140"
+                    image={data.img}
+                    className={classes.card_img}
+                  />
+                </div>
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    className={classes.card_content}
+                    style={{ fontWeight: 700 }}
+                  >
+                    {data.card_header}
+                  </Typography>
+                  <p className={classes.para_card} style={{ width: "670px" }}>
+                    {data.para_txt}
+                  </p>
+                </CardContent>
+                <CardActions
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  className={classes.view_btn_div}
+                >
+                  <div>
+                    <Link to={data.link} style={{ textDecoration: "none" }}>
+                      <Button variant="contained" className={classes.view_btn}>
+                        View Demo
+                      </Button>
+                    </Link>
+                  </div>
+                </CardActions>
+              </Card>
+            </div>
+          ))}
 
-        {/* <div
+          {/* <div
           style={{
             height: "106px !important",
             width: "100% !important",
             backgroundColor: "#1A2138 !important",
           }}
         ></div> */}
+        </div>
       </div>
     </div>
   );
